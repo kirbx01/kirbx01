@@ -1,7 +1,8 @@
 ## Hi there 👋
 
- . .   .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
-  ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+<pre align="center" style="color: #ff007f; font-weight: bold; background: #0d1117; padding: 20px; border-radius: 8px; line-height: 1.2;">
+
+ ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 ██████╗  █████╗ ███╗   ██╗███████╗██╗  ██╗██╗
 ██╔══██╗██╔══██╗████╗  ██║██╔════╝██║  ██║██║
@@ -9,8 +10,9 @@
 ██╔═══╝ ██╔══██║██║╚██╗██║╚════██║██╔══██║██║
 ██║     ██║  ██║██║ ╚████║███████║██║  ██║██║
 ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝
+▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+</pre>
 
-<p align="center">
   <strong>3rd Year Electronics & Communication Engineering with specialisation in AI Student @ IGDTUW</strong><br>
   <i>Exploring low-level systems, computer architecture, and software performance along with game development and graphic rendering. </i>
 </p>

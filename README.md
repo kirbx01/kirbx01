@@ -10,7 +10,7 @@
 ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝
 </pre>
 
-  <strong>3rd Year Electronics & Communication Engineering with specialisation in AI Student @ IGDTUW</strong><br>
+  <strong>3rd Year Electronics & Communication Engineering with specialisation in AI Student @ IGDTUW </strong><br>
   <i>Exploring low-level systems, computer architecture, and software performance along with game development and graphic rendering. </i>
 </p>
 
@@ -21,7 +21,7 @@
 
 ---
 
-### 💻 About Me
+### About Me >"<
 
 Fervent about systems engineering and low level graphic rendering that could be put on real time use and working on them through cohesive approach!! (^///^)
 
@@ -31,7 +31,7 @@ Fervent about systems engineering and low level graphic rendering that could be 
 
 ---
 
-### 🛠️ Tech Stack & Ecosystem
+### Tech Stack & Ecosystem (≧▽≦)
 
 ```text
  ┌──────────────────────────────────────────────────────────┐

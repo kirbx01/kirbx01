@@ -11,7 +11,7 @@
 </pre>
 
   <strong>3rd Year Electronics & Communication Engineering with specialisation in AI Student @ IGDTUW </strong><br>
-  <i>Exploring low-level systems, computer architecture, and software performance along with game development and graphic rendering. </i>
+  <i>Exploring low-level systems, computer architecture, and software performance along with graphic rendering mostly. </i>
 </p>
 
 <p align="center">

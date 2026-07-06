@@ -32,7 +32,7 @@ Fervent about systems engineering and low level graphic rendering that could be 
 
 ```text
 ┌──────────────────────────────────────────────────────────┐
- │  LANGUAGES  ▶  C++  •  Python  •  Zig  •  C#             │
+ │  LANGUAGES  ▶  C++ •  C# •  Python  •  Zig               │
  │  SYSTEMS    ▶  Linux  •  WSL  •  VMs                     │
  │  GRAPHICS   ▶  OpenGL  •  DirectX                        │
  │  CREATIVE   ▶  Krita  •  After Effects  •  Photoshop     │

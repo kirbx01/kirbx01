@@ -23,7 +23,7 @@
 
 ```console
 > sysname
-kirbyandluigixxcf
+kirbx01
 
 > languages
 C++ • Python • JS 

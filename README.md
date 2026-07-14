@@ -29,7 +29,7 @@ kirbx01
 C++ • Python • JS 
 
 > graphics
-Krita • Blender • AE • CapCut
+Krita • Blender • AE 
 
 > location
 WASP-193b

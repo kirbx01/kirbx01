@@ -44,5 +44,3 @@ Existing...
 </td>
 </tr>
 </table>
-
-![](profile-3d-contrib/profile-night-view.svg)

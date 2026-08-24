@@ -121,7 +121,7 @@ def generate_svg(data):
     <text x="20" y="205" class="text-main"><tspan class="dim"> 2020</tspan> systemd-udevd   (Kernel)   <tspan class="dim">3</tspan>         localhost  S   0.0  0.0    0:01.01  udevd</text>
 
     <rect x="20" y="235" width="760" height="115" class="highlight-box" />
-    <text x="35" y="260" class="text-main">USER: <tspan class="green">{GITHUB_USER}</tspan>  |  OS: <tspan class="cyan">Linux / Nix / Ubuntu</tspan>  |  SHELL: <tspan class="orange">Zsh</tspan></text>
+    <text x="35" y="260" class="text-main">USER: <tspan class="green">{GITHUB_USER}</tspan>  |  OS: <tspan class="cyan">Linux / Nix / Ubuntu /Arch/ OpenBSD </tspan>  |  SHELL: <tspan class="orange">Zsh</tspan></text>
     <text x="35" y="280" class="text-main">STACK: <tspan class="fuchsia">Go, Gin, Python, C++, Espressif IoT</tspan></text>
     <text x="35" y="300" class="text-main">$ ping {GITHUB_USER}</text>
     

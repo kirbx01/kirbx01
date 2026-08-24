@@ -12,44 +12,36 @@
         .highlight-box { stroke: #30363d; stroke-width: 1; fill: none; rx: 4px; }
     </style>
 
-    <!-- Terminal Background -->
     <rect width="800" height="440" class="bg" />
 
-    <!-- htop Top Bars -->
-    <text x="20" y="30" class="text-main">1  [<tspan class="green">|||||||||||||||||||||||||||||||||||||||||||||||||||||||||</tspan>] 100.0%</text>
-    <text x="450" y="30" class="text-main">Accnt Age: <tspan class="fuchsia">UPDATE FAILED</tspan></text>
+    <text x="20" y="30" class="text-main">1  [<tspan class="green">||||||||||||||||||||||||||||||</tspan>] 100.0%</text>
+    <text x="435" y="30" class="text-main">Account Age: <tspan class="fuchsia">2 years, 3 months</tspan></text>
 
-    <text x="20" y="50" class="text-main">2  [<tspan class="orange">||||||||||||||||||||||||||||||||||||</tspan>                  ]  72.4%</text>
-    <text x="450" y="50" class="text-main">Since: <tspan class="cyan">2024</tspan> (Dynamic)</text>
+    <text x="20" y="50" class="text-main">2  [<tspan class="orange">||||||||||||||||||||||||</tspan>              ]  72.4%</text>
+    <text x="435" y="50" class="text-main">Load average: <tspan class="cyan">1.33 1.15 1.08</tspan></text>
 
-    <text x="20" y="70" class="text-main">Mem[<tspan class="green">||||||||||||||||||||||||||||||||||||||||</tspan>                  ] 64.2G/96.0G]</text>
-    <text x="450" y="70" class="text-main">Status: <tspan class="green">ONLINE</tspan> | <tspan class="dim">Last Commit:</tspan> 20m ago</text>
+    <text x="20" y="70" class="text-main">Mem[<tspan class="green">||||||||||||||||||||||||||||||||||||||||</tspan>] 64.2G/96.0G]</text>
+    <text x="435" y="70" class="text-main">Status: <tspan class="green">ONLINE</tspan></text>
 
-    <text x="20" y="90" class="text-main">Swp[<tspan class="orange">||</tspan>                                                      ]  1.2G/16.0G]</text>
+    <text x="20" y="90" class="text-main">Swp[<tspan class="orange">||</tspan>                                  ]  1.2G/16.0G]</text>
 
-    <!-- Activity Table Header -->
     <text x="20" y="125" class="text-main dim">  ID ACTIVITY     TYPE     COUNT     REPO_SRC S   CPU% MEM%   TIME+     Command</text>
     
-    <!-- Dynamic Process List (GitHub Stats) -->
-    <text x="20" y="145" class="text-main"><tspan class="fuchsia"> 1001</tspan> Total Commits   (Activity) <tspan class="cyan">???</tspan>    github.com S  18.2  0.6   31:42.10  contribution_graph</text>
-    <text x="20" y="165" class="text-main"><tspan class="fuchsia"> 1002</tspan> Pull Requests   (Review)   <tspan class="cyan">???</tspan>      github.com S   9.1  0.2   15:18.40  open_pr_tracker</text>
-    <text x="20" y="185" class="text-main"><tspan class="fuchsia"> 1003</tspan> Open Issues     (Bug/Feat) <tspan class="cyan">???</tspan>     github.com S   4.5  0.1    7:09.10  issue_monitor</text>
+    <text x="20" y="145" class="text-main"><tspan class="fuchsia"> 1001</tspan> Total Commits   (Activity) <tspan class="cyan">1.2K</tspan>    github.com S  18.2  0.6   31:42.10  contribution_graph</text>
+    <text x="20" y="165" class="text-main"><tspan class="fuchsia"> 1002</tspan> Pull Requests   (Review)   <tspan class="cyan">45</tspan>      github.com S   9.1  0.2   15:18.40  open_pr_tracker</text>
+    <text x="20" y="185" class="text-main"><tspan class="fuchsia"> 1003</tspan> Open Issues     (Bug/Feat) <tspan class="cyan">12</tspan>     github.com S   4.5  0.1    7:09.10  issue_monitor</text>
     <text x="20" y="205" class="text-main"><tspan class="dim"> 2020</tspan> systemd-udevd   (Kernel)   <tspan class="dim">3</tspan>         localhost  S   0.0  0.0    0:01.01  udevd</text>
 
-    <!-- System Information Panel -->
-    <rect x="20" y="235" width="760" height="110" class="highlight-box" />
+    <rect x="20" y="235" width="760" height="115" class="highlight-box" />
     <text x="35" y="260" class="text-main">USER: <tspan class="green">kirbx01</tspan>  |  OS: <tspan class="cyan">Linux / Nix / Ubuntu</tspan>  |  SHELL: <tspan class="orange">Zsh</tspan></text>
     <text x="35" y="280" class="text-main">STACK: <tspan class="fuchsia">Go, Gin, Python, C++, Espressif IoT</tspan></text>
     <text x="35" y="300" class="text-main">$ ping kirbx01</text>
     
-    <!-- Clickable Links -->
     <a href="https://github.com/kirbx01" target="_blank">
         <text x="35" y="325" class="text-main">Status: <tspan class="green">ONLINE</tspan>  |  GitHub: <tspan class="cyan">github.com/kirbx01</tspan></text>
     </a>
 
-    <!-- Clickable Organization Links (Dynamic) -->
-    <text x="20" y="365" class="text-main dim">ORGS:</text>
-    
-    <!-- Footer Keys -->
-    <text x="20" y="417" class="text-main dim" font-size="11px">F3:search  F4:filter  F5:tree  F6:sort-by  F9:kill  F10:quit</text>
+    <text x="20" y="375" class="text-main dim">ORGS:</text>
+    <text x="75" y="375" class="text-main dim">None public</text>
+    <text x="20" y="418" class="text-main dim" font-size="11px">F3:search  F4:filter  F5:tree  F6:sort-by  F9:kill  F10:quit</text>
 </svg>

@@ -129,19 +129,18 @@ def generate_svg(data):
         <text x="35" y="325" class="text-main">Status: <tspan class="green">ONLINE</tspan>  |  GitHub: <tspan class="cyan">github.com/{GITHUB_USER}</tspan></text>
     </a>
 
-    <text x="20" y="375" class="text-main dim">ORGS:</text>
     """
     
-    current_x = 75
-    if data['organizations']:
-        for org in data['organizations']:
-            org_link = f"""<a href="{org['url']}" target="_blank">
-                <text x="{current_x}" y="375" class="text-main fuchsia">{org['login']}</text>
-            </a>"""
-            svg_content += org_link
-            current_x += len(org['login']) * 10 + 25
-    else:
-        svg_content += f"""<text x="{current_x}" y="375" class="text-main dim">None public</text>"""
+    # current_x = 75
+    # if data['organizations']:
+    #     for org in data['organizations']:
+    #         org_link = f"""<a href="{org['url']}" target="_blank">
+    #             <text x="{current_x}" y="375" class="text-main fuchsia">{org['login']}</text>
+    #         </a>"""
+    #         svg_content += org_link
+    #         current_x += len(org['login']) * 10 + 25
+    # else:
+    #     svg_content += f"""<text x="{current_x}" y="375" class="text-main dim">None public</text>"""
 
     svg_content += """
     <text x="20" y="418" class="text-main dim" font-size="11px">F3:search  F4:filter  F5:tree  F6:sort-by  F9:kill  F10:quit</text>

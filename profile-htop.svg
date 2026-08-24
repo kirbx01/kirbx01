@@ -1,0 +1,53 @@
+<svg width="800" height="420" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        .bg { fill: #0d1117; rx: 10px; }
+        .text-main { font-family: 'Courier New', Courier, monospace; font-size: 13px; fill: #c9d1d9; }
+        .green { fill: #3fb950; font-weight: bold; }
+        .cyan { fill: #58a6ff; }
+        .orange { fill: #d29922; }
+        .fuchsia { fill: #ff79c6; font-weight: bold; }
+        .dim { fill: #8b949e; }
+        a:hover text { text-decoration: underline; fill: #58a6ff; }
+    </style>
+
+    <!-- Terminal Background -->
+    <rect width="800" height="420" class="bg" />
+
+    <!-- htop Top Bars -->
+    <text x="20" y="30" class="text-main">1  [<tspan class="green">|||||||||||||||||||||||||||||||||||||||||||||||||||||||||</tspan>] 100.0%</text>
+    <text x="450" y="30" class="text-main">Tasks: <tspan class="fuchsia">42</tspan>, 18 thr; 1 running</text>
+
+    <text x="20" y="50" class="text-main">2  [<tspan class="orange">||||||||||||||||||||||||||||||||||||</tspan>                  ]  72.4%</text>
+    <text x="450" y="50" class="text-main">Load average: <tspan class="cyan">1.33 1.15 1.08</tspan></text>
+
+    <text x="20" y="70" class="text-main">Mem[<tspan class="green">||||||||||||||||||||||||||||||||||||||||</tspan>                  ] 64.2G/96.0G]</text>
+    <text x="450" y="70" class="text-main">Uptime: <tspan class="orange">21 years, 3 months</tspan></text>
+
+    <text x="20" y="90" class="text-main">Swp[<tspan class="orange">||</tspan>                                                      ]  1.2G/16.0G]</text>
+
+    <!-- Table Header -->
+    <text x="20" y="125" class="text-main dim">  PID USER      PRI  NI    VIRT    RES    SHR S  CPU% MEM%   TIME+     Command</text>
+    
+    <!-- Processes (with your stack) -->
+    <text x="20" y="145" class="text-main"><tspan class="fuchsia"> 4040</tspan> kirbx01    20   0   1420M   450M   120M S  15.2  0.5   12:42.10  <tspan class="cyan">linux_tools</tspan></text>
+    <text x="20" y="165" class="text-main"><tspan class="fuchsia"> 1337</tspan> kirbx01    20   0    890M   210M    85M S   8.5  0.2    5:18.44  <tspan class="cyan">gin_backend</tspan></text>
+    <text x="20" y="185" class="text-main"><tspan class="fuchsia"> 2026</tspan> kirbx01    20   0    520M   110M    45M S   4.1  0.1    2:09.12  <tspan class="cyan">espressif_iot</tspan></text>
+    <text x="20" y="205" class="text-main"><tspan class="fuchsia"> 3137</tspan> kirbx01    20   0    380M    92M    32M S   3.7  0.1    1:44.20  <tspan class="cyan">open_source</tspan></text>
+    <text x="20" y="225" class="text-main"><tspan class="fuchsia"> 1338</tspan> kirbx01    20   0    256M    64M    21M S   2.4  0.1    0:52.31  <tspan class="cyan">fun_projects</tspan></text>
+    <text x="20" y="245" class="text-main"><tspan class="dim"> 0001</tspan> root       20   0     12M     4M     2M S   0.0  0.0    0:01.05  systemd [init_life]</text>
+
+    <!-- Panel Box -->
+    <rect x="20" y="265" width="760" height="110" fill="none" stroke="#30363d" stroke-width="1" rx="4px" />
+    
+    <text x="35" y="290" class="text-main">USER: <tspan class="green">kirbx01</tspan>  |  OS: <tspan class="cyan">Nix / Ubuntu</tspan>  |  SHELL: <tspan class="orange">Zsh</tspan></text>
+    <text x="35" y="310" class="text-main">STACK: <tspan class="fuchsia">Go, Gin, Python, C++, Espressif</tspan></text>
+    <text x="35" y="330" class="text-main">$ ping kirbx01</text>
+    
+    <!-- Clickable GitHub Link -->
+    <a href="https://github.com/kirbx01" target="_blank">
+        <text x="35" y="355" class="text-main">Status: <tspan class="green">ONLINE</tspan>  |  GitHub: <tspan class="cyan">github.com/kirbx01</tspan></text>
+    </a>
+
+    <!-- Footer Keys -->
+    <text x="20" y="402" class="text-main dim" font-size="11px">F3:search  F4:filter  F5:tree  F6:sort-by  F9:kill  F10:quit</text>
+</svg>

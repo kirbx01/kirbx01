@@ -103,15 +103,15 @@ def generate_svg(data):
     <rect width="800" height="440" class="bg" />
 
     <text x="20" y="30" class="text-main">1  [<tspan class="green">||||||||||||||||||||||||||||||</tspan>] 100.0%</text>
-    <text x="435" y="30" class="text-main">Account Age: <tspan class="fuchsia">{data['account_age']}</tspan></text>
+    <text x="450" y="30" class="text-main">Account Age: <tspan class="fuchsia">{data['account_age']}</tspan></text>
 
     <text x="20" y="50" class="text-main">2  [<tspan class="orange">||||||||||||||||||||||||</tspan>              ]  72.4%</text>
-    <text x="435" y="50" class="text-main">Load average: <tspan class="cyan">1.33 1.15 1.08</tspan></text>
+    <text x="450" y="50" class="text-main">Load average: <tspan class="cyan">1.33 1.15 1.08</tspan></text>
 
-    <text x="20" y="70" class="text-main">Mem[<tspan class="green">||||||||||||||||||||||||||||||||||||||||</tspan>] 64.2G/96.0G]</text>
-    <text x="435" y="70" class="text-main">Status: <tspan class="green">ONLINE</tspan></text>
+    <text x="20" y="70" class="text-main">Mem[<tspan class="green">||||||||||||||||||||||||||||||||||||||||</tspan>] 64.2G/96.0G</text>
+    <text x="450" y="70" class="text-main">Status: <tspan class="green">ONLINE</tspan></text>
 
-    <text x="20" y="90" class="text-main">Swp[<tspan class="orange">||</tspan>                                  ]  1.2G/16.0G]</text>
+    <text x="20" y="90" class="text-main">Swp[<tspan class="orange">||</tspan>                                  ]  1.2G/16.0G</text>
 
     <text x="20" y="125" class="text-main dim">  ID ACTIVITY     TYPE     COUNT     REPO_SRC S   CPU% MEM%   TIME+     Command</text>
     

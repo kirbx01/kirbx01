@@ -41,7 +41,6 @@
         <text x="35" y="325" class="text-main">Status: <tspan class="green">ONLINE</tspan>  |  GitHub: <tspan class="cyan">github.com/kirbx01</tspan></text>
     </a>
 
-    <text x="20" y="375" class="text-main dim">ORGS:</text>
-    <text x="75" y="375" class="text-main dim">None public</text>
+    
     <text x="20" y="418" class="text-main dim" font-size="11px">F3:search  F4:filter  F5:tree  F6:sort-by  F9:kill  F10:quit</text>
 </svg>

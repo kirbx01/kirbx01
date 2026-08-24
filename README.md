@@ -1,45 +1,9 @@
-<table>
-<tr>
-<td valign="top">
+<p align="center">
+  <a href="https://github.com/kirbx01">
+    <img src="profile-htop.svg" alt="kirbx01 stats" width="100%">
+  </a>
+</p>
 
-```text
-⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⣤⢴⣲⣤⡖⣶⡠⡄⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⣀⡖⠛⠉⠉⠉⠁⠛⢺⢷⡻⠜⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠐⠀⠀⠀⠀⠀⢀⣀⣀⠀⠈⢻⢧⡀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢀⣾⣿⣧⠀⠀⣿⣿⣿⣇⠀⠀⢹⠦⠄⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢰⣿⣿⣿⠀⠀⣿⣿⣿⣯⠀⠀⠠⣟⣶⣀⡴⣾⢦
-⠀⣠⣤⣀⡀⠀⠽⣿⡿⠂⠀⠙⠿⡿⠋⠀⠀⢠⣿⣿⣷⣻⢳⠂
-⠘⢧⣛⡾⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⣷⠛⠀⠀
-⠀⠈⠫⢷⣏⣧⡀⠀⠀⠀⢀⡀⠀⠀⠀⠀⣴⣿⣳⢿⣱⠀⠀⠀
-⠀⠀⠀⠀⠘⢷⣳⢶⣀⣀⢈⡁⣀⣤⢶⣿⣻⢾⣿⢿⣿⣶⡰⡄
-⠀⠀⠀⠀⠀⠐⣯⢾⡵⣯⣿⡟⠹⢚⣿⡿⣭⣿⣅⣾⣯⠷⢿⢖
-⠀⠀⠀⠀⠀⢀⣸⢿⣻⣟⣿⣚⢷⣫⢞⣵⣿⣯⣟⡫⢔⡙⢌⡂
-⠀⠀⠀⠀⠀⠠⢯⣏⡷⣽⡲⣏⣾⣱⡯⣿⣿⣯⡝⡘⠤⢘⠈⠀
-⠀⠀⠀⠀⠀⠀⠈⣾⣿⣵⣿⣽⣾⠃⠀⠘⠻⠵⣡⠨⠒⠁⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠘⠿⣿⢿⠿⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-```
-
-</td>
-<td valign="top">
-
-```console
-> sysname
-kirbx01
-
-> languages
-C++ • Python • JS 
-
-> graphics
-Krita • Blender • AE 
-
-> location
-WASP-193b
-
-> status
-Existing...
-
-```
-
-</td>
-</tr>
-</table>
+<p align="center">
+  $${\color{fuchsia}\text{⋆⊱༻𖥸༺⊰⋆}}$$
+</p>

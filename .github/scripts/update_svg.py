@@ -5,6 +5,8 @@ import requests
 GITHUB_USER = os.environ.get("GH_USERNAME", "kirbx01")
 TOKEN = os.environ.get("GH_TOKEN")
 OUTPUT_SVG = "profile-htop.svg"
+EXCLUDED_LANGUAGES = {"Jupyter Notebook"}
+RECENT_ACTIVITY_DAYS = 180
 
 COLOR_BG = "#0d1117"
 COLOR_TEXT_MAIN = "#c9d1d9"

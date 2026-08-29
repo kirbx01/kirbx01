@@ -29,10 +29,11 @@
     <text x="450" y="70" class="text-main">Status: <tspan class="green">ONLINE<animate attributeName="opacity" values="1;1;0.15;1" keyTimes="0;0.6;0.8;1" dur="1.6s" repeatCount="indefinite"/></tspan></text>
 
     <text x="20" y="90" class="text-main">Swp[<tspan class="orange">||</tspan>                                  ]  1.2G/16.0G</text>
+    <text x="450" y="90" class="text-main">Contributions(yr): <tspan class="cyan">409</tspan></text>
 
     <text x="20" y="125" class="text-main dim">  ID ACTIVITY     TYPE     COUNT     REPO_SRC S   CPU% MEM%   TIME+     Command</text>
 
-    <text x="20" y="145" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.0s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1001</tspan> Total Commits   (Activity) <tspan class="cyan">224</tspan>    github.com S  18.2  0.6   31:42.10  contribution_graph</text>
+    <text x="20" y="145" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.0s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1001</tspan> Total Commits   (Activity) <tspan class="cyan">225</tspan>    github.com S  18.2  0.6   31:42.10  contribution_graph</text>
     <text x="20" y="165" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.08s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1002</tspan> Pull Requests   (Review)   <tspan class="cyan">22</tspan>      github.com S   9.1  0.2   15:18.40  open_pr_tracker</text>
     <text x="20" y="185" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.16s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1003</tspan> Open Issues     (Bug/Feat) <tspan class="cyan">2</tspan>     github.com S   4.5  0.1    7:09.10  issue_monitor</text>
     <text x="20" y="205" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.24s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1004</tspan> Code Reviews    (Review)   <tspan class="cyan">0</tspan>      github.com S   6.3  0.1    5:02.77  pr_review_bot</text>
@@ -71,24 +72,24 @@
     <text x="412" y="348" class="text-main dim">1.6%</text>
 
     <rect x="20" y="375" width="760" height="115" class="highlight-box" />
-    <text x="35" y="400" class="text-main">USER: <tspan class="green">kirbx01</tspan>  |  OS: <tspan class="cyan">Linux / Nix / Ubuntu / Arch / OpenBSD</tspan>  |  SHELL: <tspan class="orange">Zsh</tspan></text>
+    <text x="35" y="400" class="text-main">USER: <tspan class="green">kirbx01</tspan>  |  OS: <tspan class="cyan">Linux / Arch / BSD</tspan>  |  SHELL: <tspan class="orange">Zsh</tspan></text>
     <text x="35" y="420" class="text-main">STACK: <tspan class="fuchsia">Go, Gin, Python, C++, Espressif, Arduino</tspan></text>
 
     <clipPath id="ping-clip">
         <rect x="35" y="430" height="16" width="0">
-            <animate attributeName="width" from="0" to="109.2" begin="0.6s" dur="1.4s" fill="freeze" calcMode="linear"/>
+            <animate attributeName="width" from="0" to="120.39999999999999" begin="0.6s" dur="1.4s" fill="freeze" calcMode="linear"/>
         </rect>
     </clipPath>
     <text x="35" y="440" class="text-main" clip-path="url(#ping-clip)">$ ping kirbx01</text>
-    <rect x="144.2" y="428" width="7" height="15" fill="#3fb950">
-        <animate attributeName="x" from="35" to="144.2" begin="0.6s" dur="1.4s" fill="freeze" calcMode="linear"/>
+    <rect x="155.39999999999998" y="428" width="7" height="15" fill="#3fb950">
+        <animate attributeName="x" from="35" to="155.39999999999998" begin="0.6s" dur="1.4s" fill="freeze" calcMode="linear"/>
         <animate attributeName="opacity" values="1;0;1" dur="0.9s" begin="2s" repeatCount="indefinite"/>
     </rect>
 
     <a href="https://github.com/kirbx01" target="_blank">
         <text x="35" y="465" opacity="0" class="text-main">
             <animate attributeName="opacity" from="0" to="1" begin="2.1s" dur="0.4s" fill="freeze"/>
-            Status: <tspan class="green">ONLINE</tspan>  |  GitHub: <tspan class="cyan">github.com/kirbx01</tspan>  |  Contributions(yr): <tspan class="cyan">408</tspan>
+            Status: <tspan class="green">ONLINE</tspan>  |  GitHub: <tspan class="cyan">github.com/kirbx01</tspan>
         </text>
     </a>
 

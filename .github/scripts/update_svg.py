@@ -270,7 +270,7 @@ def generate_svg(data: dict) -> str:
     <text x="450" y="50" class="text-main">Total Stars: <tspan class="cyan">{data['total_stars']}</tspan></text>
 
     <text x="20" y="70" class="text-main">Mem[<tspan class="green">||||||||||</tspan>] 64.2G/96.0G</text>
-    <text x="450" y="70" class="text-main">Status: <tspan class="green">ONLINE<animate attributeName="opacity" values="1;1;0.15;1" keyTimes="0;0.6;0.8;1" dur="1.6s" repeatCount="indefinite"/></tspan></text>
+    <text x="450" y="70" class="text-main">Status: <tspan class="red">COOKED<animate attributeName="opacity" values="1;1;0.15;1" keyTimes="0;0.6;0.8;1" dur="1.6s" repeatCount="indefinite"/></tspan></text>
 
     <text x="20" y="90" class="text-main">Swp[<tspan class="orange">||</tspan>                                  ]  1.2G/16.0G</text>
     <text x="450" y="90" class="text-main">Contributions(yr): <tspan class="cyan">{data['total_contributions']}</tspan></text>

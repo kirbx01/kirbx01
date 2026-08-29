@@ -235,7 +235,7 @@ def generate_svg(data: dict) -> str:
     # render past the box border
     box_inner_available_px = 760 - (35 - 20) - 15  # box width minus left offset minus right margin
 
-    user_line_plain = f"USER: {GITHUB_USER}  |  OS: Linux / Arch / BSD  |  SHELL: Zsh"
+    user_line_plain = f"USER: {GITHUB_USER}  |  OS: Nix / Arch / FreeBSD/ Solaris |  SHELL: Zsh"
     stack_line_plain = "STACK: Go, Gin, Python, C++, Espressif, Arduino"
     status_line_plain = f"Status: ONLINE  |  GitHub: github.com/{GITHUB_USER}"
 

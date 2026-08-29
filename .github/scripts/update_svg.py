@@ -247,6 +247,7 @@ def generate_svg(data: dict) -> str:
         .bg {{ fill: {COLOR_BG}; }}
         .text-main {{ font-family: 'Courier New', Courier, monospace; font-size: 13px; fill: {COLOR_TEXT_MAIN}; white-space: pre; }}
         .green {{ fill: {COLOR_GREEN}; font-weight: bold; }}
+        .red {{ fill: {COLOR_RED}; font-weight: bold;}}
         .cyan {{ fill: {COLOR_CYAN}; }}
         .orange {{ fill: {COLOR_ORANGE}; }}
         .fuchsia {{ fill: {COLOR_FUCHSIA}; font-weight: bold; }}

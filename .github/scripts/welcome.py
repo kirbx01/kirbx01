@@ -4,7 +4,7 @@ from PIL import Image, ImageSequence
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
 
-SOURCE = os.path.join(REPO_ROOT, ".github", "assets", "bearu.gif")
+SOURCE = ".github/scripts/bearu.gif"
 OUTPUT = os.path.join(REPO_ROOT, "welcome.gif")
 TARGET_WIDTH = 830  
 

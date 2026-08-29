@@ -194,6 +194,20 @@ def _fade_in(index: int, base_delay: float = 0.08) -> str:
     return f'<animate attributeName="opacity" from="0" to="1" begin="{delay}s" dur="0.35s" fill="freeze"/>'
 
 
+def _safe_text_len_attrs(plain_text: str, max_width_px: float, per_char: float = 8.6) -> str:
+    """
+    Returns a textLength/lengthAdjust attribute string if the text is likely
+    to overflow max_width_px, so a long username/stack list can never push
+    past the box border regardless of font substitution or bold-glyph
+    widths (both of which make plain char-count guesses unreliable).
+    Left as a no-op (natural spacing) when the text safely fits.
+    """
+    natural = len(plain_text) * per_char
+    if natural > max_width_px:
+        return f' textLength="{max_width_px:.0f}" lengthAdjust="spacingAndGlyphs"'
+    return ""
+
+
 def generate_svg(data: dict) -> str:
     demo_tag = ""
     if data.get("fallback"):
@@ -212,7 +226,18 @@ def generate_svg(data: dict) -> str:
 
     ping_text = f"$ ping {GITHUB_USER}"
     # length in "monospace units" for the typewriter clip animation
-    ping_len_px = len(ping_text) * 7.8
+    # (per_char kept in sync with _safe_text_len_attrs so the cursor
+    # lands exactly where the text visually ends, not short/long of it)
+    ping_len_px = len(ping_text) * 8.6
+
+    # available horizontal space inside the highlight box, used to clamp
+    # any dynamic line (long usernames, stack lists, etc.) so it can never
+    # render past the box border
+    box_inner_available_px = 760 - (35 - 20) - 15  # box width minus left offset minus right margin
+
+    user_line_plain = f"USER: {GITHUB_USER}  |  OS: Linux / Arch / BSD  |  SHELL: Zsh"
+    stack_line_plain = "STACK: Go, Gin, Python, C++, Espressif, Arduino"
+    status_line_plain = f"Status: ONLINE  |  GitHub: github.com/{GITHUB_USER}"
 
     svg_content = f"""<svg width="800" height="{total_h}" viewBox="0 0 800 {total_h}" xmlns="http://www.w3.org/2000/svg">
     <style>
@@ -245,6 +270,7 @@ def generate_svg(data: dict) -> str:
     <text x="450" y="70" class="text-main">Status: <tspan class="green">ONLINE<animate attributeName="opacity" values="1;1;0.15;1" keyTimes="0;0.6;0.8;1" dur="1.6s" repeatCount="indefinite"/></tspan></text>
 
     <text x="20" y="90" class="text-main">Swp[<tspan class="orange">||</tspan>                                  ]  1.2G/16.0G</text>
+    <text x="450" y="90" class="text-main">Contributions(yr): <tspan class="cyan">{data['total_contributions']}</tspan></text>
 
     <text x="20" y="125" class="text-main dim">  ID ACTIVITY     TYPE     COUNT     REPO_SRC S   CPU% MEM%   TIME+     Command</text>
 
@@ -257,8 +283,8 @@ def generate_svg(data: dict) -> str:
     {_lang_bars(data, lang_bars_start_y)}
 
     <rect x="20" y="{box_y}" width="760" height="{box_h}" class="highlight-box" />
-    <text x="35" y="{box_y + 25}" class="text-main">USER: <tspan class="green">{GITHUB_USER}</tspan>  |  OS: <tspan class="cyan">Linux / Nix / Ubuntu / Arch / OpenBSD</tspan>  |  SHELL: <tspan class="orange">Zsh</tspan></text>
-    <text x="35" y="{box_y + 45}" class="text-main">STACK: <tspan class="fuchsia">Go, Gin, Python, C++, Espressif, Arduino</tspan></text>
+    <text x="35" y="{box_y + 25}" class="text-main"{_safe_text_len_attrs(user_line_plain, box_inner_available_px)}>USER: <tspan class="green">{GITHUB_USER}</tspan>  |  OS: <tspan class="cyan">Linux / Arch / BSD</tspan>  |  SHELL: <tspan class="orange">Zsh</tspan></text>
+    <text x="35" y="{box_y + 45}" class="text-main"{_safe_text_len_attrs(stack_line_plain, box_inner_available_px)}>STACK: <tspan class="fuchsia">Go, Gin, Python, C++, Espressif, Arduino</tspan></text>
 
     <clipPath id="ping-clip">
         <rect x="35" y="{box_y + 55}" height="16" width="0">
@@ -272,9 +298,9 @@ def generate_svg(data: dict) -> str:
     </rect>
 
     <a href="https://github.com/{GITHUB_USER}" target="_blank">
-        <text x="35" y="{box_y + 90}" opacity="0" class="text-main">
+        <text x="35" y="{box_y + 90}" opacity="0" class="text-main"{_safe_text_len_attrs(status_line_plain, box_inner_available_px)}>
             <animate attributeName="opacity" from="0" to="1" begin="2.1s" dur="0.4s" fill="freeze"/>
-            Status: <tspan class="green">ONLINE</tspan>  |  GitHub: <tspan class="cyan">github.com/{GITHUB_USER}</tspan>  |  Contributions(yr): <tspan class="cyan">{data['total_contributions']}</tspan>
+            Status: <tspan class="green">ONLINE</tspan>  |  GitHub: <tspan class="cyan">github.com/{GITHUB_USER}</tspan>
         </text>
     </a>
 

@@ -3,6 +3,7 @@
         .bg { fill: #0d1117; }
         .text-main { font-family: 'Courier New', Courier, monospace; font-size: 13px; fill: #c9d1d9; white-space: pre; }
         .green { fill: #3fb950; font-weight: bold; }
+        .red { fill: #f85149; font-weight: bold;}
         .cyan { fill: #58a6ff; }
         .orange { fill: #d29922; }
         .fuchsia { fill: #ff79c6; font-weight: bold; }
@@ -29,11 +30,11 @@
     <text x="450" y="70" class="text-main">Status: <tspan class="red">COOKED<animate attributeName="opacity" values="1;1;0.15;1" keyTimes="0;0.6;0.8;1" dur="1.6s" repeatCount="indefinite"/></tspan></text>
 
     <text x="20" y="90" class="text-main">Swp[<tspan class="orange">||</tspan>                                  ]  1.2G/16.0G</text>
-    <text x="450" y="90" class="text-main">Contributions(yr): <tspan class="cyan">426</tspan></text>
+    <text x="450" y="90" class="text-main">Contributions(yr): <tspan class="cyan">427</tspan></text>
 
     <text x="20" y="125" class="text-main dim">  ID ACTIVITY     TYPE     COUNT     REPO_SRC S   CPU% MEM%   TIME+     Command</text>
 
-    <text x="20" y="145" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.0s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1001</tspan> Total Commits   (Activity) <tspan class="cyan">242</tspan>    github.com S  18.2  0.6   31:42.10  contribution_graph</text>
+    <text x="20" y="145" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.0s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1001</tspan> Total Commits   (Activity) <tspan class="cyan">243</tspan>    github.com S  18.2  0.6   31:42.10  contribution_graph</text>
     <text x="20" y="165" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.08s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1002</tspan> Pull Requests   (Review)   <tspan class="cyan">22</tspan>      github.com S   9.1  0.2   15:18.40  open_pr_tracker</text>
     <text x="20" y="185" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.16s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1003</tspan> Open Issues     (Bug/Feat) <tspan class="cyan">2</tspan>     github.com S   4.5  0.1    7:09.10  issue_monitor</text>
     <text x="20" y="205" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.24s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1004</tspan> Code Reviews    (Review)   <tspan class="cyan">0</tspan>      github.com S   6.3  0.1    5:02.77  pr_review_bot</text>

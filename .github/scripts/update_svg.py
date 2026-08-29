@@ -5,7 +5,9 @@ import requests
 GITHUB_USER = os.environ.get("GH_USERNAME", "kirbx01")
 TOKEN = os.environ.get("GH_TOKEN")
 OUTPUT_SVG = "profile-htop.svg"
+
 EXCLUDED_LANGUAGES = {"Jupyter Notebook"}
+
 RECENT_ACTIVITY_DAYS = 180
 
 COLOR_BG = "#0d1117"
@@ -86,6 +88,7 @@ def get_github_data() -> dict:
         repositories(first: 100, ownerAffiliations: OWNER, isFork: false, privacy: PUBLIC) {
           nodes {
             stargazerCount
+            pushedAt
             languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
               edges {
                 size
@@ -133,11 +136,24 @@ def get_github_data() -> dict:
         repos = user["repositories"]["nodes"]
         total_stars = sum(r["stargazerCount"] for r in repos)
 
+        if RECENT_ACTIVITY_DAYS is not None:
+            cutoff = now - datetime.timedelta(days=RECENT_ACTIVITY_DAYS)
+            lang_source_repos = [
+                r for r in repos
+                if datetime.datetime.strptime(r["pushedAt"], "%Y-%m-%dT%H:%M:%SZ") >= cutoff
+            ]
+            if not lang_source_repos:
+                lang_source_repos = repos
+        else:
+            lang_source_repos = repos
+
         lang_bytes: dict[str, int] = {}
         lang_colors: dict[str, str] = {}
-        for r in repos:
+        for r in lang_source_repos:
             for edge in r["languages"]["edges"]:
                 name = edge["node"]["name"]
+                if name in EXCLUDED_LANGUAGES:
+                    continue
                 lang_bytes[name] = lang_bytes.get(name, 0) + edge["size"]
                 lang_colors[name] = edge["node"]["color"] or LANG_COLOR_FALLBACK.get(name, COLOR_DIM)
 
@@ -171,7 +187,6 @@ def get_github_data() -> dict:
 
 
 def _lang_bars(data: dict, start_y: int) -> str:
-    """Rect-based 'core meter' bars for top languages, animated fill-in."""
     bar_x = 140
     bar_w = 260
     bar_h = 12
@@ -191,19 +206,11 @@ def _lang_bars(data: dict, start_y: int) -> str:
 
 
 def _fade_in(index: int, base_delay: float = 0.08) -> str:
-    """SMIL snippet to fade a row in on a stagger, like a boot log."""
     delay = base_delay * index
     return f'<animate attributeName="opacity" from="0" to="1" begin="{delay}s" dur="0.35s" fill="freeze"/>'
 
 
 def _safe_text_len_attrs(plain_text: str, max_width_px: float, per_char: float = 8.6) -> str:
-    """
-    Returns a textLength/lengthAdjust attribute string if the text is likely
-    to overflow max_width_px, so a long username/stack list can never push
-    past the box border regardless of font substitution or bold-glyph
-    widths (both of which make plain char-count guesses unreliable).
-    Left as a no-op (natural spacing) when the text safely fits.
-    """
     natural = len(plain_text) * per_char
     if natural > max_width_px:
         return f' textLength="{max_width_px:.0f}" lengthAdjust="spacingAndGlyphs"'
@@ -227,17 +234,11 @@ def generate_svg(data: dict) -> str:
     total_h = footer_y + 20
 
     ping_text = f"$ ping {GITHUB_USER}"
-    # length in "monospace units" for the typewriter clip animation
-    # (per_char kept in sync with _safe_text_len_attrs so the cursor
-    # lands exactly where the text visually ends, not short/long of it)
     ping_len_px = len(ping_text) * 8.6
 
-    # available horizontal space inside the highlight box, used to clamp
-    # any dynamic line (long usernames, stack lists, etc.) so it can never
-    # render past the box border
-    box_inner_available_px = 760 - (35 - 20) - 15  # box width minus left offset minus right margin
+    box_inner_available_px = 760 - (35 - 20) - 15
 
-    user_line_plain = f"USER: {GITHUB_USER}  |  OS: Nix / Arch / FreeBSD/ Solaris |  SHELL: Zsh"
+    user_line_plain = f"USER: {GITHUB_USER}  |  OS: Linux / Arch / BSD  |  SHELL: Zsh"
     stack_line_plain = "STACK: Go, Gin, Python, C++, Espressif, Arduino"
     status_line_plain = f"Status: ONLINE  |  GitHub: github.com/{GITHUB_USER}"
 
@@ -285,7 +286,7 @@ def generate_svg(data: dict) -> str:
     {_lang_bars(data, lang_bars_start_y)}
 
     <rect x="20" y="{box_y}" width="760" height="{box_h}" class="highlight-box" />
-    <text x="35" y="{box_y + 25}" class="text-main"{_safe_text_len_attrs(user_line_plain, box_inner_available_px)}>USER: <tspan class="green">{GITHUB_USER}</tspan>  |  OS: <tspan class="cyan">Linux / Arch / BSD</tspan>  |  SHELL: <tspan class="orange">Zsh</tspan></text>
+    <text x="35" y="{box_y + 25}" class="text-main"{_safe_text_len_attrs(user_line_plain, box_inner_available_px)}>USER: <tspan class="green">{GITHUB_USER}</tspan>  |  OS: <tspan class="cyan"> Nix / Arch / FreeBSD/ DOS</tspan>  |  SHELL: <tspan class="orange">Zsh</tspan></text>
     <text x="35" y="{box_y + 45}" class="text-main"{_safe_text_len_attrs(stack_line_plain, box_inner_available_px)}>STACK: <tspan class="fuchsia">Go, Gin, Python, C++, Espressif, Arduino</tspan></text>
 
     <clipPath id="ping-clip">

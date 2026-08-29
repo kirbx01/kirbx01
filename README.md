@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="welcoming.gif" alt="Welcome" width="700">
+  <img src="bearswelcom.gif" alt="Welcome" width="700">
 </p>
 
 <p align="center">

@@ -24,7 +24,7 @@
     <text x="20" y="50" class="text-main">2  [<tspan class="orange">||||||||||||||||||||||||</tspan>              ]  72.4%
         <animate attributeName="opacity" values="1;0.5;1" dur="1.8s" repeatCount="indefinite"/>
     </text>
-    <text x="450" y="50" class="text-main">Total Stars: <tspan class="cyan">10</tspan></text>
+    <text x="450" y="50" class="text-main">Total Stars: <tspan class="cyan">9</tspan></text>
 
     <text x="20" y="70" class="text-main">Mem[<tspan class="green">||||||||||</tspan>] 64.2G/96.0G</text>
     <text x="450" y="70" class="text-main">Status: <tspan class="red">COOKED<animate attributeName="opacity" values="1;1;0.15;1" keyTimes="0;0.6;0.8;1" dur="1.6s" repeatCount="indefinite"/></tspan></text>

@@ -30,11 +30,11 @@
     <text x="450" y="70" class="text-main">Status: <tspan class="red">COOKED<animate attributeName="opacity" values="1;1;0.15;1" keyTimes="0;0.6;0.8;1" dur="1.6s" repeatCount="indefinite"/></tspan></text>
 
     <text x="20" y="90" class="text-main">Swp[<tspan class="orange">||</tspan>                                  ]  1.2G/16.0G</text>
-    <text x="450" y="90" class="text-main">Contributions(yr): <tspan class="cyan">427</tspan></text>
+    <text x="450" y="90" class="text-main">Contributions(yr): <tspan class="cyan">432</tspan></text>
 
     <text x="20" y="125" class="text-main dim">  ID ACTIVITY     TYPE     COUNT     REPO_SRC S   CPU% MEM%   TIME+     Command</text>
 
-    <text x="20" y="145" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.0s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1001</tspan> Total Commits   (Activity) <tspan class="cyan">242</tspan>    github.com S  18.2  0.6   31:42.10  contribution_graph</text>
+    <text x="20" y="145" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.0s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1001</tspan> Total Commits   (Activity) <tspan class="cyan">246</tspan>    github.com S  18.2  0.6   31:42.10  contribution_graph</text>
     <text x="20" y="165" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.08s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1002</tspan> Pull Requests   (Review)   <tspan class="cyan">26</tspan>      github.com S   9.1  0.2   15:18.40  open_pr_tracker</text>
     <text x="20" y="185" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.16s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1003</tspan> Open Issues     (Bug/Feat) <tspan class="cyan">2</tspan>     github.com S   4.5  0.1    7:09.10  issue_monitor</text>
     <text x="20" y="205" opacity="0" class="text-main"><animate attributeName="opacity" from="0" to="1" begin="0.24s" dur="0.35s" fill="freeze"/><tspan class="fuchsia"> 1004</tspan> Code Reviews    (Review)   <tspan class="cyan">0</tspan>      github.com S   6.3  0.1    5:02.77  pr_review_bot</text>
@@ -44,30 +44,30 @@
     <text x="20" y="260" class="text-main">C         </text>
     <rect x="140" y="250" width="260" height="12" fill="#21262d" stroke="#30363d" rx="2"/>
     <rect x="140" y="250" width="0" height="12" fill="#555555" rx="2">
-        <animate attributeName="width" from="0" to="207.2" begin="0.0s" dur="1.1s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1" keyTimes="0;1" values="0;207.2"/>
+        <animate attributeName="width" from="0" to="205.9" begin="0.0s" dur="1.1s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1" keyTimes="0;1" values="0;205.9"/>
     </rect>
-    <text x="412" y="260" class="text-main dim">79.7%</text>
+    <text x="412" y="260" class="text-main dim">79.2%</text>
     <text x="20" y="282" class="text-main">JavaScript</text>
     <rect x="140" y="272" width="260" height="12" fill="#21262d" stroke="#30363d" rx="2"/>
     <rect x="140" y="272" width="0" height="12" fill="#f1e05a" rx="2">
         <animate attributeName="width" from="0" to="23.7" begin="0.15s" dur="1.1s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1" keyTimes="0;1" values="0;23.7"/>
     </rect>
     <text x="412" y="282" class="text-main dim">9.1%</text>
-    <text x="20" y="304" class="text-main">Go        </text>
+    <text x="20" y="304" class="text-main">C++       </text>
     <rect x="140" y="294" width="260" height="12" fill="#21262d" stroke="#30363d" rx="2"/>
-    <rect x="140" y="294" width="0" height="12" fill="#00ADD8" rx="2">
-        <animate attributeName="width" from="0" to="9.4" begin="0.3s" dur="1.1s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1" keyTimes="0;1" values="0;9.4"/>
+    <rect x="140" y="294" width="0" height="12" fill="#f34b7d" rx="2">
+        <animate attributeName="width" from="0" to="9.6" begin="0.3s" dur="1.1s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1" keyTimes="0;1" values="0;9.6"/>
     </rect>
-    <text x="412" y="304" class="text-main dim">3.6%</text>
-    <text x="20" y="326" class="text-main">Objective-</text>
+    <text x="412" y="304" class="text-main dim">3.7%</text>
+    <text x="20" y="326" class="text-main">Go        </text>
     <rect x="140" y="316" width="260" height="12" fill="#21262d" stroke="#30363d" rx="2"/>
-    <rect x="140" y="316" width="0" height="12" fill="#438eff" rx="2">
-        <animate attributeName="width" from="0" to="8.3" begin="0.44999999999999996s" dur="1.1s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1" keyTimes="0;1" values="0;8.3"/>
+    <rect x="140" y="316" width="0" height="12" fill="#00ADD8" rx="2">
+        <animate attributeName="width" from="0" to="9.4" begin="0.44999999999999996s" dur="1.1s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1" keyTimes="0;1" values="0;9.4"/>
     </rect>
-    <text x="412" y="326" class="text-main dim">3.2%</text>
-    <text x="20" y="348" class="text-main">C++       </text>
+    <text x="412" y="326" class="text-main dim">3.6%</text>
+    <text x="20" y="348" class="text-main">Objective-</text>
     <rect x="140" y="338" width="260" height="12" fill="#21262d" stroke="#30363d" rx="2"/>
-    <rect x="140" y="338" width="0" height="12" fill="#f34b7d" rx="2">
+    <rect x="140" y="338" width="0" height="12" fill="#438eff" rx="2">
         <animate attributeName="width" from="0" to="8.1" begin="0.6s" dur="1.1s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1" keyTimes="0;1" values="0;8.1"/>
     </rect>
     <text x="412" y="348" class="text-main dim">3.1%</text>

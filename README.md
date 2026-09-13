@@ -2,6 +2,13 @@
   <img src="welcome.gif" alt="Welcome" width="100%">
 </p>
 
+
+<div align="center">
+  <img src="https://u8views.com/api/v1/github/profiles/107796784/views/pixel.svg" width="0" height="0" alt="" />
+  <a href="https://u8views.com/github/kirbx01"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fu8views.com%2Fapi%2Fv1%2Fgithub%2Fprofiles%2F107796784%2Fviews%2Fcount.json&query=%24.day_count&label=Views%20today&color=ff4c4c&labelColor=b30000&style=for-the-badge" alt="Views Today"></a><a href="https://u8views.com/github/kirbx01"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fu8views.com%2Fapi%2Fv1%2Fgithub%2Fprofiles%2F107796784%2Fviews%2Fcount.json&query=%24.week_count&label=Week&color=3399ff&labelColor=005ce6&style=for-the-badge" alt="Views This Week"></a><a href="https://u8views.com/github/kirbx01"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fu8views.com%2Fapi%2Fv1%2Fgithub%2Fprofiles%2F107796784%2Fviews%2Fcount.json&query=%24.month_count&label=Month&color=ffb6c1&labelColor=ff69b4&style=for-the-badge" alt="Views This Month"></a><a href="https://u8views.com/github/kirbx01"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fu8views.com%2Fapi%2Fv1%2Fgithub%2Fprofiles%2F107796784%2Fviews%2Fcount.json&query=%24.total_count&label=Total&color=a0522d&labelColor=5c3a21&style=for-the-badge" alt="Total Views"></a>
+</div>
+<br/><br/>
+
 <p align="center">
   <img src="profile-htop.svg" alt="kirbx01 stats" width="100%">
 </p>
@@ -17,11 +24,6 @@
     <img src="https://skillicons.dev/icons?i=c,cpp,go,python,ts,react,nextjs,docker,unity,blender,linux&theme=dark" alt="Tech Stack" />
   </a>
 </p>
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=kirbx01&label=Profile+Views&color=ff79c6&style=for-the-badge" alt="Profile views" />
-</p>
-
 
 <p align="center">
   $${\color{fuchsia}\text{⋆⊱༻𖥸༺⊰⋆}}$$

@@ -13,8 +13,15 @@
 </p>
 
 <p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=c,cpp,go,python,ts,react,nextjs,docker,unity,blender,linux&theme=dark" alt="Tech Stack" />
+  </a>
+</p>
+
+<p align="center">
   <img src="https://komarev.com/ghpvc/?username=kirbx01&label=Profile+Views&color=ff79c6&style=for-the-badge" alt="Profile views" />
 </p>
+
 
 <p align="center">
   $${\color{fuchsia}\text{⋆⊱༻𖥸༺⊰⋆}}$$

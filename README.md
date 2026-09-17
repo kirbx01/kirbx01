@@ -10,6 +10,12 @@
 <br/><br/>
 
 <p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=c,cpp,go,python,ts,react,nextjs,docker,unity,blender,linux&theme=dark" alt="Tech Stack" />
+  </a>
+</p>
+
+<p align="center">
   <img src="profile-htop.svg" alt="kirbx01 stats" width="100%">
 </p>
 
@@ -20,9 +26,7 @@
 </p>
 
 <p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=c,cpp,go,python,ts,react,nextjs,docker,unity,blender,linux&theme=dark" alt="Tech Stack" />
-  </a>
+  <img src="https://duolingo-stats-card.vercel.app/api?username=1aint1&theme=mint" alt="Duolingo Stats" />
 </p>
 
 <p align="center">

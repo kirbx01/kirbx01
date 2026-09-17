@@ -26,7 +26,7 @@
 </p>
 
 <p align="center">
-  <img src="https://duolingo-stats-card.vercel.app/api?username=1aint1&theme=mint" alt="Duolingo Stats" />
+  <img src="https://duolingo-stats-card.vercel.app/api?username=z3taxxx&theme=mint" alt="Duolingo Stats" />
 </p>
 
 <p align="center">

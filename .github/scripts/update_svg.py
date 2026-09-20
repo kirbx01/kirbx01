@@ -1,4 +1,5 @@
 import os
+import re
 import base64
 import datetime
 import requests
@@ -72,6 +73,22 @@ def _fallback_data(reason: str) -> dict:
     }
 
 
+def get_profile_contribution_total(headers: dict) -> int | None:
+    try:
+        response = requests.get(
+            f"https://github.com/users/{GITHUB_USER}/contributions",
+            headers={**headers, "User-Agent": "Mozilla/5.0 (X11; Linux x86_64)"},
+            timeout=15,
+        )
+        response.raise_for_status()
+        match = re.search(r"(\d[\d,]*)\s+contributions?\s+in\s+the\s+last\s+year", response.text)
+        if match:
+            return int(match.group(1).replace(",", ""))
+        return None
+    except Exception:
+        return None
+
+
 def get_github_data() -> dict:
     if not TOKEN:
         return _fallback_data("GH_TOKEN environment variable is not set")
@@ -135,6 +152,10 @@ def get_github_data() -> dict:
         total_commits = cc["totalCommitContributions"]
         total_reviews = cc["totalPullRequestReviewContributions"]
         total_contribs = cc["contributionCalendar"]["totalContributions"]
+
+        profile_total = get_profile_contribution_total(headers)
+        if profile_total is not None:
+            total_contribs = profile_total
 
         total_prs = user["pullRequests"]["totalCount"]
         total_issues = user["issues"]["totalCount"]

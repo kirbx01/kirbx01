@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="welcome.gif" alt="Welcome" width="100%">
+  <img src="welcome.gif" alt="kirbx01" width="100%">
 </p>
 
 
@@ -10,13 +10,25 @@
 <br/><br/>
 
 <p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=c,cpp,go,python,ts,react,nextjs,docker,unity,blender,linux&theme=dark" alt="Tech Stack" />
+  <a href="boot.html" target="_blank">
+    <img src="profile-htop.svg" alt="kirbx01 boot screen" width="100%">
   </a>
 </p>
 
 <p align="center">
-  <img src="profile-htop.svg" alt="kirbx01 stats" width="100%">
+  <a href="https://panshi.onrender.com" target="_blank"><img src="https://img.shields.io/badge/RUN%20THE%20INTERACTIVE%20TERMINAL-live-0000a8?style=for-the-badge&labelColor=55ffff&color=aaaaaa" alt="Run the interactive terminal"></a>
+</p>
+
+<p align="center">
+  <a href="boot.html" target="_blank"><img src="https://img.shields.io/badge/open%20the%20source%20file-boot.html-aaaaaa?style=for-the-badge&labelColor=0000a8&color=aaaaaa" alt="Open boot.html"></a>
+</p>
+
+<p align="center">use the arrow keys to select, Enter to run</p>
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=c,cpp,go,python,ts,react,nextjs,docker,unity,blender,linux&theme=dark" alt="Tech Stack" />
+  </a>
 </p>
 
 <p align="center">
@@ -27,8 +39,4 @@
 
 <p align="center">
   <img src="https://duolingo-stats-card.vercel.app/api?username=z3taxxx&theme=mint" alt="Duolingo Stats" />
-</p>
-
-<p align="center">
-  $${\color{fuchsia}\text{⋆⊱༻𖥸༺⊰⋆}}$$
 </p>

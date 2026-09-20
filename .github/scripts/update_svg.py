@@ -1,31 +1,37 @@
 import os
+import base64
 import datetime
 import requests
 
 GITHUB_USER = os.environ.get("GH_USERNAME", "kirbx01")
 TOKEN = os.environ.get("GH_TOKEN")
-OUTPUT_SVG = "profile-htop.svg"
+def _repo_root() -> str:
+    here = os.path.dirname(os.path.abspath(__file__))
+    return os.path.dirname(os.path.dirname(here))
+
+
+OUTPUT_SVG = os.path.join(_repo_root(), "profile-htop.svg")
+FONT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ModernDOS8x16.ttf")
 
 EXCLUDED_LANGUAGES = {"Jupyter Notebook"}
 
 RECENT_ACTIVITY_DAYS = 180
 
-COLOR_BG = "#0d1117"
-COLOR_TEXT_MAIN = "#c9d1d9"
-COLOR_GREEN = "#3fb950"
-COLOR_CYAN = "#58a6ff"
-COLOR_ORANGE = "#d29922"
-COLOR_FUCHSIA = "#ff79c6"
-COLOR_DIM = "#8b949e"
-COLOR_TRACK = "#21262d"
-COLOR_TRACK_STROKE = "#30363d"
-COLOR_RED = "#f85149"
+COLOR_BG = "#0000a8"
+COLOR_BORDER = "#aaaaaa"
+COLOR_MAIN = "#aaaaaa"
+COLOR_TEXT = "#ffffff"
+COLOR_CYAN = "#55ffff"
+COLOR_DIM = "#8888b8"
+COLOR_RED = "#ff5555"
+COLOR_SEL_TXT = "#0000a8"
+COLOR_SEL_DIM = "#404040"
 
 LANG_COLOR_FALLBACK = {
     "Python": "#3572A5",
     "Go": "#00ADD8",
     "C++": "#f34b7d",
-    "C": "#555555",
+    "C": "#7a7a7a",
     "JavaScript": "#f1e05a",
     "TypeScript": "#3178c6",
     "Arduino": "#bd79d1",
@@ -46,7 +52,7 @@ def format_large_number(num: int) -> str:
 
 
 def _fallback_data(reason: str) -> dict:
-    print(f"::warning:: profile-htop: using DEMO data — {reason}")
+    print(f"::warning:: profile-htop: using DEMO data: {reason}")
     return {
         "account_age": "N/A",
         "total_contributions": "0",
@@ -183,132 +189,151 @@ def get_github_data() -> dict:
         }
 
     except Exception as e:
-        return _fallback_data(f"exception during fetch — {e}")
+        return _fallback_data(f"exception during fetch: {e}")
 
 
-def _lang_bars(data: dict, start_y: int) -> str:
-    bar_x = 140
-    bar_w = 260
-    bar_h = 12
+def _font_css() -> str:
+    try:
+        with open(FONT_PATH, "rb") as f:
+            b = base64.b64encode(f.read()).decode("ascii")
+        return f"@font-face{{font-family:'ModernDOS';src:url(data:font/ttf;base64,{b}) format('truetype');}}"
+    except Exception:
+        return ""
+
+
+def _fade_in(index: int, base_delay: float = 0.1) -> str:
+    delay = round(base_delay * index, 2)
+    return f'<animate attributeName="opacity" from="0" to="1" begin="{delay}s" dur="0.3s" fill="freeze"/>'
+
+
+def _lang_bars(data: dict, start_y: int, x0: int, label_w: int, bar_x: int, bar_w: int) -> str:
     rows = []
     for i, lang in enumerate(data["languages"]):
-        y = start_y + i * 22
-        target_w = round(bar_w * lang["pct"] / 100, 1)
-        delay = 0.15 * i
-        rows.append(f"""
-    <text x="20" y="{y + bar_h - 2}" class="text-main">{lang['name'][:10]:<10}</text>
-    <rect x="{bar_x}" y="{y}" width="{bar_w}" height="{bar_h}" fill="{COLOR_TRACK}" stroke="{COLOR_TRACK_STROKE}" rx="2"/>
-    <rect x="{bar_x}" y="{y}" width="0" height="{bar_h}" fill="{lang['color']}" rx="2">
-        <animate attributeName="width" from="0" to="{target_w}" begin="{delay}s" dur="1.1s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1" keyTimes="0;1" values="0;{target_w}"/>
+        y = start_y + i * 19
+        target = round(bar_w * lang["pct"] / 100, 1)
+        delay = round(0.12 * i, 2)
+        rows.append(
+            f'''    <text x="{x0}" y="{y + 11}" class="seldim">{lang['name'][:12]:<12}</text>
+    <rect x="{bar_x}" y="{y}" width="{bar_w}" height="{12}" fill="#d9d9d9"/>
+    <rect x="{bar_x}" y="{y}" width="0" height="{12}" fill="{lang['color']}">
+        <animate attributeName="width" from="0" to="{target}" begin="{delay}s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="{bar_x + bar_w + 12}" y="{y + bar_h - 2}" class="text-main dim">{lang['pct']:.1f}%</text>""")
+    <text x="{bar_x + bar_w + 14}" y="{y + 11}" class="seldim">{lang['pct']:.1f}%</text>'''
+        )
     return "".join(rows)
 
 
-def _fade_in(index: int, base_delay: float = 0.08) -> str:
-    delay = base_delay * index
-    return f'<animate attributeName="opacity" from="0" to="1" begin="{delay}s" dur="0.35s" fill="freeze"/>'
-
-
-def _safe_text_len_attrs(plain_text: str, max_width_px: float, per_char: float = 8.6) -> str:
-    natural = len(plain_text) * per_char
-    if natural > max_width_px:
-        return f' textLength="{max_width_px:.0f}" lengthAdjust="spacingAndGlyphs"'
-    return ""
-
-
 def generate_svg(data: dict) -> str:
+    W = 800
+    x0 = 36
+    x1 = W - x0
+    nlang = len(data["languages"])
+
+    stat_pairs = [
+        ("Total Commits", "total_commits"),
+        ("Pull Requests", "total_prs"),
+        ("Code Reviews", "total_reviews"),
+        ("Issues", "total_issues"),
+        ("Stars", "total_stars"),
+        ("Year Contributions", "total_contributions"),
+    ]
+
+    sel_item_y = 76
+    sel_title_y = sel_item_y + 30
+    stat_y = [sel_title_y + 26 + 21 * i for i in range(len(stat_pairs))]
+    lang_title_y = stat_y[-1] + 32
+    bar_y_start = lang_title_y + 16
+    if nlang:
+        bar_y = [bar_y_start + 19 * i for i in range(nlang)]
+        sel_box_h = bar_y[-1] + 24
+    else:
+        sel_box_h = lang_title_y + 16
+
+    drop_titles = [
+        "Stats &amp; Pull Requests (Advanced)",
+        "Memory Diagnostic (Tests and Linting)",
+        "System Shutdown (Standby Mode)",
+    ]
+    next_y = sel_item_y + sel_box_h + 12
+    item_h = 40
+    item_gap = 8
+    drop_rows = []
+    for i, t in enumerate(drop_titles):
+        y = next_y + i * (item_h + item_gap)
+        drop_rows.append(
+            f'''    <g class="row">
+      <rect x="{x0}" y="{y}" width="{W - 2 * x0}" height="{item_h}" class="rd"/>
+      <text x="{x0 + 20}" y="{y + 26}" class="plain">{t}</text>
+    </g>'''
+        )
+
+    foot_y = next_y + len(drop_titles) * (item_h + item_gap) - item_gap + 8
+    H = foot_y + 84
+
     demo_tag = ""
     if data.get("fallback"):
-        demo_tag = f'<text x="780" y="20" text-anchor="end" class="text-main" fill="{COLOR_RED}" font-size="11px">[DEMO DATA — GH_TOKEN missing/invalid]</text>'
+        demo_tag = f'<text x="{x1}" y="44" text-anchor="end" class="red" font-size="13">demo data</text>'
 
-    lang_section_title_y = 235
-    lang_bars_start_y = 250
-    n_langs = len(data["languages"])
-    lang_section_bottom = lang_bars_start_y + n_langs * 22
+    stat_rows = []
+    for i, (label, key) in enumerate(stat_pairs):
+        y = stat_y[i]
+        stat_rows.append(
+            f'''      <text x="{x0 + 20}" y="{y}" class="seldim">{label}</text>
+      <text x="{x1 - 20}" y="{y}" text-anchor="end" class="sel" font-size="17">{data[key]}{_fade_in(i, 0.08)}</text>'''
+        )
 
-    box_y = lang_section_bottom + 15
-    box_h = 115
-    footer_y = box_y + box_h + 25
+    lang_block = ""
+    if nlang:
+        lang_block = (
+            f'    <text x="{x0 + 20}" y="{lang_title_y}" class="sel" font-size="15">Primary Languages{_fade_in(6, 0.1)}</text>'
+            + "\n"
+            + _lang_bars(data, bar_y_start, x0 + 20, 20, 280, 380)
+            + "\n"
+        )
 
-    total_h = footer_y + 20
-
-    ping_text = f"$ ping {GITHUB_USER}"
-    ping_len_px = len(ping_text) * 8.6
-
-    box_inner_available_px = 760 - (35 - 20) - 15
-
-    user_line_plain = f"USER: {GITHUB_USER}  |  OS: Linux / Arch / BSD  |  SHELL: fih "
-    stack_line_plain = "STACK: Go, Gin, Python, C++, Espressif, Arduino"
-    status_line_plain = f"Status: ONLINE  |  GitHub: github.com/{GITHUB_USER}"
-
-    svg_content = f"""<svg width="800" height="{total_h}" viewBox="0 0 800 {total_h}" xmlns="http://www.w3.org/2000/svg">
+    svg_content = f"""<svg width="{W}" height="{H}" viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg">
     <style>
+        {_font_css()}
         .bg {{ fill: {COLOR_BG}; }}
-        .text-main {{ font-family: 'Courier New', Courier, monospace; font-size: 13px; fill: {COLOR_TEXT_MAIN}; white-space: pre; }}
-        .green {{ fill: {COLOR_GREEN}; font-weight: bold; }}
-        .red {{ fill: {COLOR_RED}; font-weight: bold;}}
-        .cyan {{ fill: {COLOR_CYAN}; }}
-        .orange {{ fill: {COLOR_ORANGE}; }}
-        .fuchsia {{ fill: {COLOR_FUCHSIA}; font-weight: bold; }}
-        .dim {{ fill: {COLOR_DIM}; }}
+        .frame {{ stroke: {COLOR_BORDER}; stroke-width: 3; fill: none; }}
+        .frame2 {{ stroke: {COLOR_BORDER}; stroke-width: 1; fill: none; }}
+        .plain {{ font-family: 'ModernDOS','Courier New',monospace; font-size: 16px; fill: {COLOR_MAIN}; }}
+        .cyan {{ font-family: 'ModernDOS','Courier New',monospace; font-size: 16px; fill: {COLOR_CYAN}; }}
+        .seldim {{ font-family: 'ModernDOS','Courier New',monospace; font-size: 15px; fill: {COLOR_SEL_DIM}; }}
+        .title {{ font-family: 'ModernDOS','Courier New',monospace; font-size: 24px; fill: {COLOR_TEXT}; letter-spacing: 3px; }}
+        .sel {{ font-family: 'ModernDOS','Courier New',monospace; font-size: 16px; fill: {COLOR_SEL_TXT}; }}
+        .red {{ font-family: 'ModernDOS','Courier New',monospace; fill: {COLOR_RED}; }}
         a {{ text-decoration: none; }}
-        a:hover text {{ fill: {COLOR_CYAN}; }}
-        .highlight-box {{ stroke: {COLOR_TRACK_STROKE}; stroke-width: 1; fill: none; rx: 4px; }}
+        .row {{ cursor: pointer; }}
+        .row:hover .rd {{ stroke: {COLOR_CYAN}; }}
+        .row:hover .plain {{ fill: {COLOR_CYAN}; }}
+        .rs {{ stroke: {COLOR_BORDER}; stroke-width: 4; fill: #ffffff; }}
+        .rs2 {{ stroke: {COLOR_SEL_TXT}; stroke-width: 1.5; fill: none; }}
+        .rd {{ stroke: {COLOR_BORDER}; stroke-width: 2; fill: none; }}
     </style>
 
-    <rect width="800" height="{total_h}" class="bg" rx="10"/>
+    <rect width="{W}" height="{H}" class="bg"/>
+    <rect x="12" y="12" width="{W - 24}" height="{H - 24}" class="frame"/>
+    <rect x="17" y="17" width="{W - 34}" height="{H - 34}" class="frame2"/>
     {demo_tag}
 
-    <text x="20" y="30" class="text-main">1  [<tspan class="green">||||||||||||||||||||||||||||||</tspan>] 100.0%
-        <animate attributeName="opacity" values="1;0.55;1" dur="2.4s" repeatCount="indefinite"/>
-    </text>
-    <text x="450" y="30" class="text-main">Account Age: <tspan class="fuchsia">{data['account_age']}</tspan></text>
+    <text x="{x0}" y="42" class="cyan">GNU GRUB version 2.06</text>
+    <text x="{x1}" y="46" text-anchor="end" class="title">kirbx01</text>
+    <line x1="{x0}" y1="60" x2="{x1}" y2="60" stroke="{COLOR_BORDER}" stroke-width="2"/>
 
-    <text x="20" y="50" class="text-main">2  [<tspan class="orange">||||||||||||||||||||||||</tspan>              ]  72.4%
-        <animate attributeName="opacity" values="1;0.5;1" dur="1.8s" repeatCount="indefinite"/>
-    </text>
-    <text x="450" y="50" class="text-main">Total Stars: <tspan class="cyan">{data['total_stars']}</tspan></text>
+    <g class="selbox">
+      <rect x="{x0}" y="{sel_item_y}" width="{W - 2 * x0}" height="{sel_box_h}" class="rs"/>
+      <rect x="{x0 + 4}" y="{sel_item_y + 4}" width="{W - 2 * x0 - 8}" height="{sel_box_h - 8}" class="rs2"/>
+      <text x="{x0 + 20}" y="{sel_title_y}" class="sel" font-size="17">kirbx01 GNU Linux (Active Contributor)</text>
+      {" ".join(stat_rows)}
+      {lang_block}
+    </g>
 
-    <text x="20" y="70" class="text-main">Mem[<tspan class="green">||||||||||</tspan>] 64.2G/96.0G</text>
-    <text x="450" y="70" class="text-main">Status: <tspan class="red">COOKED<animate attributeName="opacity" values="1;1;0.15;1" keyTimes="0;0.6;0.8;1" dur="1.6s" repeatCount="indefinite"/></tspan></text>
+    {"".join(drop_rows)}
 
-    <text x="20" y="90" class="text-main">Swp[<tspan class="orange">||</tspan>                                  ]  1.2G/16.0G</text>
-    <text x="450" y="90" class="text-main">Contributions(yr): <tspan class="cyan">{data['total_contributions']}</tspan></text>
-
-    <text x="20" y="125" class="text-main dim">  ID ACTIVITY     TYPE     COUNT     REPO_SRC S   CPU% MEM%   TIME+     Command</text>
-
-    <text x="20" y="145" opacity="0" class="text-main">{_fade_in(0)}<tspan class="fuchsia"> 1001</tspan> Total Commits   (Activity) <tspan class="cyan">{data['total_commits']}</tspan>    github.com S  18.2  0.6   31:42.10  contribution_graph</text>
-    <text x="20" y="165" opacity="0" class="text-main">{_fade_in(1)}<tspan class="fuchsia"> 1002</tspan> Pull Requests   (Review)   <tspan class="cyan">{data['total_prs']}</tspan>      github.com S   9.1  0.2   15:18.40  open_pr_tracker</text>
-    <text x="20" y="185" opacity="0" class="text-main">{_fade_in(2)}<tspan class="fuchsia"> 1003</tspan> Open Issues     (Bug/Feat) <tspan class="cyan">{data['total_issues']}</tspan>     github.com S   4.5  0.1    7:09.10  issue_monitor</text>
-    <text x="20" y="205" opacity="0" class="text-main">{_fade_in(3)}<tspan class="fuchsia"> 1004</tspan> Code Reviews    (Review)   <tspan class="cyan">{data['total_reviews']}</tspan>      github.com S   6.3  0.1    5:02.77  pr_review_bot</text>
-
-    <text x="20" y="{lang_section_title_y}" class="text-main dim">TOP LANGUAGES (by bytes across owned repos):</text>
-    {_lang_bars(data, lang_bars_start_y)}
-
-    <rect x="20" y="{box_y}" width="760" height="{box_h}" class="highlight-box" />
-    <text x="35" y="{box_y + 25}" class="text-main"{_safe_text_len_attrs(user_line_plain, box_inner_available_px)}>USER: <tspan class="green">{GITHUB_USER}</tspan>  |  OS: <tspan class="cyan"> Nix / Arch / FreeBSD/ DOS</tspan>  |  SHELL: <tspan class="orange">Zsh</tspan></text>
-    <text x="35" y="{box_y + 45}" class="text-main"{_safe_text_len_attrs(stack_line_plain, box_inner_available_px)}>STACK: <tspan class="fuchsia">Go, Gin, Python, C++, Espressif, Arduino</tspan></text>
-
-    <clipPath id="ping-clip">
-        <rect x="35" y="{box_y + 55}" height="16" width="0">
-            <animate attributeName="width" from="0" to="{ping_len_px}" begin="0.6s" dur="1.4s" fill="freeze" calcMode="linear"/>
-        </rect>
-    </clipPath>
-    <text x="35" y="{box_y + 65}" class="text-main" clip-path="url(#ping-clip)">{ping_text}</text>
-    <rect x="{35 + ping_len_px}" y="{box_y + 53}" width="7" height="15" fill="{COLOR_GREEN}">
-        <animate attributeName="x" from="35" to="{35 + ping_len_px}" begin="0.6s" dur="1.4s" fill="freeze" calcMode="linear"/>
-        <animate attributeName="opacity" values="1;0;1" dur="0.9s" begin="2s" repeatCount="indefinite"/>
-    </rect>
-
-    <a href="https://github.com/{GITHUB_USER}" target="_blank">
-        <text x="35" y="{box_y + 90}" opacity="0" class="text-main"{_safe_text_len_attrs(status_line_plain, box_inner_available_px)}>
-            <animate attributeName="opacity" from="0" to="1" begin="2.1s" dur="0.4s" fill="freeze"/>
-            Status: <tspan class="green">ONLINE</tspan>  |  GitHub: <tspan class="cyan">github.com/{GITHUB_USER}</tspan>
-        </text>
-    </a>
-
-    <text x="20" y="{footer_y}" class="text-main dim" font-size="11px">F3:search  F4:filter  F5:tree  F6:sort-by  F9:kill  F10:quit</text>
+    <line x1="{x0}" y1="{foot_y}" x2="{x1}" y2="{foot_y}" stroke="{COLOR_BORDER}" stroke-width="2"/>
+    <text x="{x0}" y="{foot_y + 26}" class="plain">Use Up and Down to select, Enter to run</text>
+    <text x="{x0}" y="{foot_y + 54}" class="cyan">The highlighted entry will be executed automatically in 5...4...3...2...1...</text>
 </svg>
 """
     return svg_content

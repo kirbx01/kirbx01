@@ -274,7 +274,7 @@ def generate_svg(data: dict) -> str:
 
     demo_tag = ""
     if data.get("fallback"):
-        demo_tag = f'<text x="{x1}" y="44" text-anchor="end" class="red" font-size="13">demo data</text>'
+        demo_tag = f'<text x="{x1}" y="58" text-anchor="end" class="red" font-size="13">demo data</text>'
 
     stat_rows = []
     for i, (label, key) in enumerate(stat_pairs):

@@ -250,21 +250,23 @@ def generate_svg(data: dict) -> str:
         sel_box_h = lang_title_y + 16
 
     drop_titles = [
-        "Stats &amp; Pull Requests (Advanced)",
-        "Memory Diagnostic (Tests and Linting)",
-        "System Shutdown (Standby Mode)",
+        ("Stats &amp; Pull Requests (Advanced)", "https://github.com/kirbx01?tab=pull-requests"),
+        ("Memory Diagnostic (Tests and Linting)", "https://github.com/kirbx01?tab=repositories"),
+        ("System Shutdown (Standby Mode)", "https://panshi.onrender.com"),
     ]
     next_y = sel_item_y + sel_box_h + 12
     item_h = 40
     item_gap = 8
     drop_rows = []
-    for i, t in enumerate(drop_titles):
+    for i, (t, href) in enumerate(drop_titles):
         y = next_y + i * (item_h + item_gap)
         drop_rows.append(
-            f'''    <g class="row">
+            f'''    <a href="{href}" target="_blank" rel="noopener">
+    <g class="row">
       <rect x="{x0}" y="{y}" width="{W - 2 * x0}" height="{item_h}" class="rd"/>
       <text x="{x0 + 20}" y="{y + 26}" class="plain">{t}</text>
-    </g>'''
+    </g>
+    </a>'''
         )
 
     foot_y = next_y + len(drop_titles) * (item_h + item_gap) - item_gap + 8
@@ -307,6 +309,7 @@ def generate_svg(data: dict) -> str:
         .row {{ cursor: pointer; }}
         .row:hover .rd {{ stroke: {COLOR_CYAN}; }}
         .row:hover .plain {{ fill: {COLOR_CYAN}; }}
+        .selbox {{ cursor: pointer; }}
         .rs {{ stroke: {COLOR_BORDER}; stroke-width: 4; fill: #ffffff; }}
         .rs2 {{ stroke: {COLOR_SEL_TXT}; stroke-width: 1.5; fill: none; }}
         .rd {{ stroke: {COLOR_BORDER}; stroke-width: 2; fill: none; }}
@@ -321,6 +324,7 @@ def generate_svg(data: dict) -> str:
     <text x="{x1}" y="46" text-anchor="end" class="title">kirbx01</text>
     <line x1="{x0}" y1="60" x2="{x1}" y2="60" stroke="{COLOR_BORDER}" stroke-width="2"/>
 
+    <a href="https://github.com/kirbx01" target="_blank" rel="noopener">
     <g class="selbox">
       <rect x="{x0}" y="{sel_item_y}" width="{W - 2 * x0}" height="{sel_box_h}" class="rs"/>
       <rect x="{x0 + 4}" y="{sel_item_y + 4}" width="{W - 2 * x0 - 8}" height="{sel_box_h - 8}" class="rs2"/>
@@ -328,6 +332,7 @@ def generate_svg(data: dict) -> str:
       {" ".join(stat_rows)}
       {lang_block}
     </g>
+    </a>
 
     {"".join(drop_rows)}
 

@@ -10,7 +10,7 @@
 <br/><br/>
 
 <p align="center">
-  <a href="boot.html" target="_blank">
+  <a href="https://raw.githubusercontent.com/kirbx01/kirbx01/main/profile-htop.svg" target="_blank">
     <img src="profile-htop.svg" alt="kirbx01 boot screen" width="100%">
   </a>
 </p>

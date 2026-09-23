@@ -43,6 +43,8 @@ LANG_COLOR_FALLBACK = {
     "Makefile": "#427819",
 }
 
+GRID_LEVEL_COLORS = ["#00005c", "#0a2a96", "#1555c9", "#3fa2f0", "#55ffff"]
+
 
 def format_large_number(num: int) -> str:
     if num >= 1_000_000:
@@ -63,6 +65,7 @@ def _fallback_data(reason: str) -> dict:
         "total_reviews": "0",
         "total_repos": "0",
         "total_stars": "0",
+        "contrib": [],
         "languages": [
             {"name": "Go", "pct": 32.0, "color": LANG_COLOR_FALLBACK["Go"]},
             {"name": "Python", "pct": 26.0, "color": LANG_COLOR_FALLBACK["Python"]},
@@ -88,6 +91,49 @@ def get_profile_contribution_total(headers: dict) -> int | None:
         return None
     except Exception:
         return None
+
+
+def scrape_contrib_public(headers: dict) -> tuple[int | None, list[dict]]:
+    try:
+        response = requests.get(
+            f"https://github.com/users/{GITHUB_USER}/contributions",
+            headers={**headers, "User-Agent": "Mozilla/5.0 (X11; Linux x86_64)"},
+            timeout=15,
+        )
+        response.raise_for_status()
+        text = response.text
+        total = None
+        match = re.search(r"(\d[\d,]*)\s+contributions?\s+in\s+the\s+last\s+year", text)
+        if match:
+            total = int(match.group(1).replace(",", ""))
+        cells = []
+        for td in re.findall(r"<td[^>]*ContributionCalendar-day[^>]*>", text):
+            md = re.search(r'data-date="([\d-]+)"', td)
+            ml = re.search(r'data-level="(\d)"', td)
+            if md and ml:
+                cells.append({"date": md.group(1), "level": int(ml.group(1))})
+        return total, cells
+    except Exception:
+        return None, []
+
+
+def _contrib_columns(days: list[dict]) -> list[list[dict]]:
+    cells = sorted(days, key=lambda d: d["date"])
+    if not cells:
+        return []
+    cols: list[list[dict]] = []
+    cur: list[dict] = []
+    first = datetime.date.fromisoformat(cells[0]["date"])
+    pad = (first.weekday() + 1) % 7
+    cur = [{"date": "", "level": 0} for _ in range(pad)]
+    for day in cells:
+        cur.append(day)
+        if len(cur) == 7:
+            cols.append(cur)
+            cur = []
+    if cur:
+        cols.append(cur)
+    return cols
 
 
 def get_github_data_public() -> dict:
@@ -139,7 +185,8 @@ def get_github_data_public() -> dict:
         for name, count in top_langs
     ]
 
-    year_total = get_profile_contribution_total({}) or 0
+    year_total, contrib_cells = scrape_contrib_public({})
+    year_total = year_total or 0
 
     return {
         "account_age": age_str,
@@ -150,6 +197,7 @@ def get_github_data_public() -> dict:
         "total_reviews": "0",
         "total_repos": format_large_number(len(repos)),
         "total_stars": format_large_number(total_stars),
+        "contrib": contrib_cells,
         "languages": languages,
         "fallback": False,
     }
@@ -173,7 +221,12 @@ def get_github_data() -> dict:
         contributionsCollection {
           totalCommitContributions
           totalPullRequestReviewContributions
-          contributionCalendar { totalContributions }
+          contributionCalendar {
+          totalContributions
+          weeks {
+            contributionDays { date contributionCount contributionLevel }
+          }
+        }
         }
         pullRequests { totalCount }
         issues { totalCount }
@@ -234,6 +287,20 @@ def get_github_data() -> dict:
         total_prs = user["pullRequests"]["totalCount"]
         total_issues = user["issues"]["totalCount"]
 
+        LEVEL_MAP = {
+            "NONE": 0,
+            "FIRST_QUARTILE": 1,
+            "SECOND_QUARTILE": 2,
+            "THIRD_QUARTILE": 3,
+            "FOURTH_QUARTILE": 4,
+        }
+        calendar = (cc.get("contributionCalendar") or {})
+        contrib_days = [
+            {"date": d["date"], "level": LEVEL_MAP.get(d.get("contributionLevel"), 0)}
+            for week in calendar.get("weeks") or []
+            for d in week.get("contributionDays") or []
+        ]
+
         repos = user["repositories"]["nodes"]
         total_repos = user["repositories"]["totalCount"]
         total_stars = sum(r["stargazerCount"] for r in repos)
@@ -249,25 +316,28 @@ def get_github_data() -> dict:
         else:
             lang_source_repos = repos
 
-        lang_bytes: dict[str, int] = {}
+        lang_counts: dict[str, int] = {}
         lang_colors: dict[str, str] = {}
         for r in lang_source_repos:
-            for edge in r["languages"]["edges"]:
-                name = edge["node"]["name"]
-                if name in EXCLUDED_LANGUAGES:
-                    continue
-                lang_bytes[name] = lang_bytes.get(name, 0) + edge["size"]
-                lang_colors[name] = edge["node"]["color"] or LANG_COLOR_FALLBACK.get(name, COLOR_DIM)
+            edges = r["languages"]["edges"]
+            if not edges:
+                continue
+            top = max(edges, key=lambda e: e["size"])
+            name = top["node"]["name"]
+            if name in EXCLUDED_LANGUAGES:
+                continue
+            lang_counts[name] = lang_counts.get(name, 0) + 1
+            lang_colors[name] = top["node"]["color"] or LANG_COLOR_FALLBACK.get(name, COLOR_DIM)
 
-        total_bytes = sum(lang_bytes.values()) or 1
-        top_langs = sorted(lang_bytes.items(), key=lambda kv: kv[1], reverse=True)[:5]
+        total_langs = sum(lang_counts.values()) or 1
+        top_langs = sorted(lang_counts.items(), key=lambda kv: kv[1], reverse=True)[:5]
         languages = [
             {
                 "name": name,
-                "pct": round(size / total_bytes * 100, 1),
+                "pct": round(count / total_langs * 100, 1),
                 "color": lang_colors[name],
             }
-            for name, size in top_langs
+            for name, count in top_langs
         ]
         if not languages:
             languages = _fallback_data("no languages found")["languages"]
@@ -281,6 +351,7 @@ def get_github_data() -> dict:
             "total_reviews": format_large_number(total_reviews),
             "total_repos": format_large_number(total_repos),
             "total_stars": format_large_number(total_stars),
+            "contrib": contrib_days,
             "languages": languages,
             "fallback": False,
         }
@@ -350,27 +421,18 @@ def generate_svg(data: dict) -> str:
     else:
         sel_box_h = lang_title_y + 16
 
-    drop_titles = [
-        ("Stats &amp; Pull Requests (Advanced)", "https://github.com/kirbx01?tab=pull-requests"),
-        ("Memory Diagnostic (Tests and Linting)", "https://github.com/kirbx01?tab=repositories"),
-        ("System Shutdown (Standby Mode)", "https://panshi.onrender.com"),
-    ]
-    next_y = sel_item_y + sel_box_h + 12
-    item_h = 40
-    item_gap = 8
-    drop_rows = []
-    for i, (t, href) in enumerate(drop_titles):
-        y = next_y + i * (item_h + item_gap)
-        drop_rows.append(
-            f'''    <a href="{href}" target="_blank" rel="noopener">
-    <g class="row">
-      <rect x="{x0}" y="{y}" width="{W - 2 * x0}" height="{item_h}" class="rd"/>
-      <text x="{x0 + 20}" y="{y + 26}" class="plain">{t}</text>
-    </g>
-    </a>'''
-        )
+    contrib_title_y = sel_item_y + sel_box_h + 30
+    grid_y = contrib_title_y + 22
 
-    foot_y = next_y + len(drop_titles) * (item_h + item_gap) - item_gap + 8
+    cell = 10
+    gap = 2
+    step = cell + gap
+    cols = _contrib_columns(data.get("contrib") or [])[-53:]
+    grid_w = len(cols) * step
+    grid_h = 7 * step
+    grid_x = x1 - 20 - grid_w
+
+    foot_y = grid_y + grid_h + 34
     H = foot_y + 84
 
     stat_rows = []
@@ -389,6 +451,34 @@ def generate_svg(data: dict) -> str:
             + _lang_bars(data, bar_y_start, x0 + 20, 20, 280, 380)
             + "\n"
         )
+
+    contrib_block = ""
+    if cols:
+        cells = []
+        for ci, col in enumerate(cols):
+            for ri in range(7):
+                level = col[ri]["level"] if ri < len(col) else 0
+                x = grid_x + ci * step
+                y = grid_y + ri * step
+                cells.append(
+                    f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" fill="{GRID_LEVEL_COLORS[level]}"/>'
+                )
+        legend_x = grid_x + 14
+        legend = (
+            f'<text x="{grid_x}" y="{grid_y + grid_h + 24}" class="plain" font-size="13">Less</text>'
+            + "".join(
+                f'<rect x="{legend_x + i * 16}" y="{grid_y + grid_h + 14}" width="{cell}" height="{cell}" fill="{GRID_LEVEL_COLORS[i]}"/>'
+                for i in range(5)
+            )
+            + f'<text x="{legend_x + 5 * 16 + 4}" y="{grid_y + grid_h + 24}" class="plain" font-size="13">More</text>'
+        )
+        contrib_block = f'''    <text x="{x0 + 20}" y="{contrib_title_y}" class="cyan" font-size="15">Contribution Graph{_fade_in(7, 0.1)}</text>
+    <g>
+      <animate attributeName="opacity" from="0" to="1" begin="0.7s" dur="0.4s" fill="freeze"/>
+      {''.join(cells)}
+    </g>
+    {legend}
+'''
 
     svg_content = f"""<svg width="{W}" height="{H}" viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg">
     <style>
@@ -430,7 +520,7 @@ def generate_svg(data: dict) -> str:
     </g>
     </a>
 
-    {"".join(drop_rows)}
+    {contrib_block}
 
     <line x1="{x0}" y1="{foot_y}" x2="{x1}" y2="{foot_y}" stroke="{COLOR_BORDER}" stroke-width="2"/>
     <text x="{x0}" y="{foot_y + 26}" class="plain">Use Up and Down to select, Enter to run</text>

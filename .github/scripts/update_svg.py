@@ -16,7 +16,7 @@ FONT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ModernDOS8
 
 EXCLUDED_LANGUAGES = {"Jupyter Notebook"}
 
-RECENT_ACTIVITY_DAYS = 180
+RECENT_ACTIVITY_DAYS = 60
 
 COLOR_BG = "#0000a8"
 COLOR_BORDER = "#aaaaaa"

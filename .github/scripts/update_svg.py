@@ -5,7 +5,7 @@ import datetime
 import requests
 
 GITHUB_USER = os.environ.get("GH_USERNAME", "kirbx01")
-TOKEN = os.environ.get("GH_TOKEN")
+TOKEN = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")
 def _repo_root() -> str:
     here = os.path.dirname(os.path.abspath(__file__))
     return os.path.dirname(os.path.dirname(here))
@@ -89,9 +89,76 @@ def get_profile_contribution_total(headers: dict) -> int | None:
         return None
 
 
+def get_github_data_public() -> dict:
+    def rest(path, **params):
+        resp = requests.get(
+            f"https://api.github.com{path}",
+            params=params,
+            headers={"Accept": "application/vnd.github+json"},
+            timeout=15,
+        )
+        resp.raise_for_status()
+        return resp.json()
+
+    now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
+
+    u = rest(f"/users/{GITHUB_USER}")
+    created_at = datetime.datetime.strptime(u["created_at"], "%Y-%m-%dT%H:%M:%SZ")
+    delta = now - created_at
+    years = delta.days // 365
+    months = (delta.days % 365) // 30
+    age_str = f"{years} yrs, {months} mos" if years > 0 else f"{months} mos"
+
+    def search_count(query: str) -> int:
+        try:
+            j = rest("/search/issues", q=query, per_page=1)
+            return int(j.get("total_count") or 0)
+        except Exception:
+            return 0
+
+    total_prs = search_count(f"author:{GITHUB_USER} type:pr")
+    total_issues = search_count(f"author:{GITHUB_USER} type:issue")
+
+    repos = rest(f"/users/{GITHUB_USER}/repos", per_page=100, sort="pushed", type="owner")
+    total_stars = sum(r.get("stargazers_count") or 0 for r in repos)
+
+    lang_counts: dict[str, int] = {}
+    lang_colors: dict[str, str] = {}
+    for r in repos:
+        name = r.get("language")
+        if not name or name in EXCLUDED_LANGUAGES:
+            continue
+        lang_counts[name] = lang_counts.get(name, 0) + 1
+        lang_colors[name] = LANG_COLOR_FALLBACK.get(name, COLOR_DIM)
+
+    total_langs = sum(lang_counts.values()) or 1
+    top_langs = sorted(lang_counts.items(), key=lambda kv: kv[1], reverse=True)[:5]
+    languages = [
+        {"name": name, "pct": round(count / total_langs * 100, 1), "color": lang_colors[name]}
+        for name, count in top_langs
+    ]
+
+    year_total = get_profile_contribution_total({}) or 0
+
+    return {
+        "account_age": age_str,
+        "total_contributions": format_large_number(year_total),
+        "total_commits": format_large_number(year_total),
+        "total_prs": format_large_number(total_prs),
+        "total_issues": format_large_number(total_issues),
+        "total_reviews": "0",
+        "total_stars": format_large_number(total_stars),
+        "languages": languages,
+        "fallback": False,
+    }
+
+
 def get_github_data() -> dict:
     if not TOKEN:
-        return _fallback_data("GH_TOKEN environment variable is not set")
+        try:
+            return get_github_data_public()
+        except Exception as e:
+            return _fallback_data(f"no token and public fetch failed: {e}")
 
     headers = {
         "Authorization": f"bearer {TOKEN}",
@@ -135,27 +202,31 @@ def get_github_data() -> dict:
         res_json = response.json()
 
         if "errors" in res_json:
-            return _fallback_data(f"GraphQL errors: {res_json['errors']}")
+            print(f"::warning:: GraphQL errors, using public data: {res_json['errors']}")
+            return get_github_data_public()
 
         user = res_json.get("data", {}).get("user")
         if not user:
-            return _fallback_data(f"no user object returned for '{GITHUB_USER}' (bad username or token scope)")
+            print(f"::warning:: no user object for '{GITHUB_USER}', using public data")
+            return get_github_data_public()
 
         created_at = datetime.datetime.strptime(user["createdAt"], "%Y-%m-%dT%H:%M:%SZ")
-        now = datetime.datetime.utcnow()
+        now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
         delta = now - created_at
         years = delta.days // 365
         months = (delta.days % 365) // 30
         age_str = f"{years} yrs, {months} mos" if years > 0 else f"{months} mos"
 
-        cc = user["contributionsCollection"]
-        total_commits = cc["totalCommitContributions"]
-        total_reviews = cc["totalPullRequestReviewContributions"]
-        total_contribs = cc["contributionCalendar"]["totalContributions"]
+        cc = user.get("contributionsCollection") or {}
+        total_commits = cc.get("totalCommitContributions") or 0
+        total_reviews = cc.get("totalPullRequestReviewContributions") or 0
+        total_contribs = (cc.get("contributionCalendar") or {}).get("totalContributions") or 0
 
         profile_total = get_profile_contribution_total(headers)
         if profile_total is not None:
             total_contribs = profile_total
+            if total_commits == 0:
+                total_commits = profile_total
 
         total_prs = user["pullRequests"]["totalCount"]
         total_issues = user["issues"]["totalCount"]
@@ -210,7 +281,11 @@ def get_github_data() -> dict:
         }
 
     except Exception as e:
-        return _fallback_data(f"exception during fetch: {e}")
+        print(f"::warning:: GraphQL fetch failed, using public data: {e}")
+        try:
+            return get_github_data_public()
+        except Exception as e2:
+            return _fallback_data(f"all data sources failed: {e2}")
 
 
 def _font_css() -> str:
@@ -293,10 +368,6 @@ def generate_svg(data: dict) -> str:
     foot_y = next_y + len(drop_titles) * (item_h + item_gap) - item_gap + 8
     H = foot_y + 84
 
-    demo_tag = ""
-    if data.get("fallback"):
-        demo_tag = f'<text x="{x1}" y="58" text-anchor="end" class="red" font-size="13">demo data</text>'
-
     stat_rows = []
     for i, (label, key) in enumerate(stat_pairs):
         y = stat_y[i]
@@ -339,7 +410,6 @@ def generate_svg(data: dict) -> str:
     <rect width="{W}" height="{H}" class="bg"/>
     <rect x="12" y="12" width="{W - 24}" height="{H - 24}" class="frame"/>
     <rect x="17" y="17" width="{W - 34}" height="{H - 34}" class="frame2"/>
-    {demo_tag}
 
     <text x="{x0}" y="42" class="cyan">GNU GRUB version 2.06</text>
     <text x="{x1}" y="46" text-anchor="end" class="title">kirbx01</text>

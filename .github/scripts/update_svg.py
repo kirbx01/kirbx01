@@ -424,7 +424,7 @@ def generate_svg(data: dict) -> str:
     contrib_title_y = sel_item_y + sel_box_h + 30
     grid_y = contrib_title_y + 22
 
-    cell = 12
+    cell = 11
     gap = 2
     step = cell + gap
     cols = _contrib_columns(data.get("contrib") or [])[-53:]
@@ -478,7 +478,7 @@ def generate_svg(data: dict) -> str:
             )
             + f'<text x="{squares_x + squares_w + lgap}" y="{grid_y + grid_h + 24}" class="plain" font-size="13">More</text>'
         )
-        contrib_block = f'''    <text x="{x0 + 20}" y="{contrib_title_y}" class="cyan" font-size="15">Contribution Graph{_fade_in(7, 0.1)}</text>
+        contrib_block = f'''    <text x="{W // 2}" y="{contrib_title_y}" text-anchor="middle" class="cyan" font-size="15">Contribution Graph{_fade_in(7, 0.1)}</text>
     <g>
       <animate attributeName="opacity" from="0" to="1" begin="0.7s" dur="0.4s" fill="freeze"/>
       {''.join(cells)}

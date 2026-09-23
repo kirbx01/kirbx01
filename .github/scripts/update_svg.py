@@ -61,6 +61,7 @@ def _fallback_data(reason: str) -> dict:
         "total_prs": "0",
         "total_issues": "0",
         "total_reviews": "0",
+        "total_repos": "0",
         "total_stars": "0",
         "languages": [
             {"name": "Go", "pct": 32.0, "color": LANG_COLOR_FALLBACK["Go"]},
@@ -147,6 +148,7 @@ def get_github_data_public() -> dict:
         "total_prs": format_large_number(total_prs),
         "total_issues": format_large_number(total_issues),
         "total_reviews": "0",
+        "total_repos": format_large_number(len(repos)),
         "total_stars": format_large_number(total_stars),
         "languages": languages,
         "fallback": False,
@@ -176,6 +178,7 @@ def get_github_data() -> dict:
         pullRequests { totalCount }
         issues { totalCount }
         repositories(first: 100, ownerAffiliations: OWNER, isFork: false, privacy: PUBLIC) {
+          totalCount
           nodes {
             stargazerCount
             pushedAt
@@ -232,6 +235,7 @@ def get_github_data() -> dict:
         total_issues = user["issues"]["totalCount"]
 
         repos = user["repositories"]["nodes"]
+        total_repos = user["repositories"]["totalCount"]
         total_stars = sum(r["stargazerCount"] for r in repos)
 
         if RECENT_ACTIVITY_DAYS is not None:
@@ -275,6 +279,7 @@ def get_github_data() -> dict:
             "total_prs": format_large_number(total_prs),
             "total_issues": format_large_number(total_issues),
             "total_reviews": format_large_number(total_reviews),
+            "total_repos": format_large_number(total_repos),
             "total_stars": format_large_number(total_stars),
             "languages": languages,
             "fallback": False,
@@ -328,7 +333,7 @@ def generate_svg(data: dict) -> str:
     stat_pairs = [
         ("Total Commits", "total_commits"),
         ("Pull Requests", "total_prs"),
-        ("Code Reviews", "total_reviews"),
+        ("Repositories", "total_repos"),
         ("Issues", "total_issues"),
         ("Stars", "total_stars"),
         ("Year Contributions", "total_contributions"),

@@ -43,7 +43,7 @@ LANG_COLOR_FALLBACK = {
     "Makefile": "#427819",
 }
 
-GRID_LEVEL_COLORS = ["#00005c", "#0a2a96", "#1555c9", "#3fa2f0", "#55ffff"]
+GRID_LEVEL_COLORS = ["#000040", "#233bb8", "#4d63db", "#8f9ff0", "#ffffff"]
 
 
 def format_large_number(num: int) -> str:
@@ -461,7 +461,7 @@ def generate_svg(data: dict) -> str:
                 x = grid_x + ci * step
                 y = grid_y + ri * step
                 cells.append(
-                    f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" fill="{GRID_LEVEL_COLORS[level]}"/>'
+                    f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="2" ry="2" fill="{GRID_LEVEL_COLORS[level]}"/>'
                 )
         txt_w = 52
         gap = 14

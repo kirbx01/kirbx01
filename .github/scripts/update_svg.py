@@ -424,7 +424,7 @@ def generate_svg(data: dict) -> str:
     contrib_title_y = sel_item_y + sel_box_h + 30
     grid_y = contrib_title_y + 22
 
-    cell = 10
+    cell = 12
     gap = 2
     step = cell + gap
     cols = _contrib_columns(data.get("contrib") or [])[-53:]
@@ -463,18 +463,20 @@ def generate_svg(data: dict) -> str:
                 cells.append(
                     f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="2" ry="2" fill="{GRID_LEVEL_COLORS[level]}"/>'
                 )
-        txt_w = 52
-        gap = 14
-        legend_w = txt_w + gap + 4 * 16 + cell + gap + txt_w
+        lgap = 10
+        sstep = 18
+        squares_w = 4 * sstep + cell
+        est_tw = 30
+        legend_w = est_tw + lgap + squares_w + lgap + est_tw
         legend_x = int((W - legend_w) // 2)
-        squares_x = legend_x + txt_w + gap
+        squares_x = legend_x + est_tw + lgap
         legend = (
-            f'<text x="{legend_x}" y="{grid_y + grid_h + 24}" class="plain" font-size="13">Less</text>'
+            f'<text x="{squares_x - lgap}" text-anchor="end" y="{grid_y + grid_h + 24}" class="plain" font-size="13">Less</text>'
             + "".join(
-                f'<rect x="{squares_x + i * 16}" y="{grid_y + grid_h + 14}" width="{cell}" height="{cell}" fill="{GRID_LEVEL_COLORS[i]}"/>'
+                f'<rect x="{squares_x + i * sstep}" y="{grid_y + grid_h + 14}" width="{cell}" height="{cell}" rx="2" ry="2" fill="{GRID_LEVEL_COLORS[i]}"/>'
                 for i in range(5)
             )
-            + f'<text x="{squares_x + 4 * 16 + cell + gap}" y="{grid_y + grid_h + 24}" class="plain" font-size="13">More</text>'
+            + f'<text x="{squares_x + squares_w + lgap}" y="{grid_y + grid_h + 24}" class="plain" font-size="13">More</text>'
         )
         contrib_block = f'''    <text x="{x0 + 20}" y="{contrib_title_y}" class="cyan" font-size="15">Contribution Graph{_fade_in(7, 0.1)}</text>
     <g>

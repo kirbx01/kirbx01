@@ -529,7 +529,7 @@ def generate_svg(data: dict) -> str:
     {contrib_block}
 
     <line x1="{x0}" y1="{foot_y}" x2="{x1}" y2="{foot_y}" stroke="{COLOR_BORDER}" stroke-width="2"/>
-    <text x="{x0}" y="{foot_y + 26}" class="plain">Use Up and Down to select, Enter to run</text>
+    <text x="{x0}" y="{foot_y + 26}" class="plain">Thanks for visiting, I hope you liked my profile! :3 </text>
     <text x="{x0}" y="{foot_y + 54}" class="cyan">The highlighted entry will be executed automatically in 5...4...3...2...1...</text>
 </svg>
 """

@@ -34,39 +34,39 @@
       <rect x="40" y="80" width="720" height="377" class="rs2"/>
       <text x="56" y="106" class="sel" font-size="17">kirbx01 GNU Linux (Active Contributor)</text>
             <text x="56" y="132" class="seldim">Total Commits</text>
-      <text x="744" y="132" text-anchor="end" class="sel" font-size="17">463<animate attributeName="opacity" from="0" to="1" begin="0.0s" dur="0.3s" fill="freeze"/></text>       <text x="56" y="153" class="seldim">Pull Requests</text>
+      <text x="744" y="132" text-anchor="end" class="sel" font-size="17">464<animate attributeName="opacity" from="0" to="1" begin="0.0s" dur="0.3s" fill="freeze"/></text>       <text x="56" y="153" class="seldim">Pull Requests</text>
       <text x="744" y="153" text-anchor="end" class="sel" font-size="17">28<animate attributeName="opacity" from="0" to="1" begin="0.08s" dur="0.3s" fill="freeze"/></text>       <text x="56" y="174" class="seldim">Repositories</text>
       <text x="744" y="174" text-anchor="end" class="sel" font-size="17">18<animate attributeName="opacity" from="0" to="1" begin="0.16s" dur="0.3s" fill="freeze"/></text>       <text x="56" y="195" class="seldim">Issues</text>
       <text x="744" y="195" text-anchor="end" class="sel" font-size="17">7<animate attributeName="opacity" from="0" to="1" begin="0.24s" dur="0.3s" fill="freeze"/></text>       <text x="56" y="216" class="seldim">Stars</text>
       <text x="744" y="216" text-anchor="end" class="sel" font-size="17">20<animate attributeName="opacity" from="0" to="1" begin="0.32s" dur="0.3s" fill="freeze"/></text>       <text x="56" y="237" class="seldim">Year Contributions</text>
-      <text x="744" y="237" text-anchor="end" class="sel" font-size="17">666<animate attributeName="opacity" from="0" to="1" begin="0.4s" dur="0.3s" fill="freeze"/></text>
+      <text x="744" y="237" text-anchor="end" class="sel" font-size="17">667<animate attributeName="opacity" from="0" to="1" begin="0.4s" dur="0.3s" fill="freeze"/></text>
           <text x="56" y="269" class="sel" font-size="15">Primary Languages<animate attributeName="opacity" from="0" to="1" begin="0.6s" dur="0.3s" fill="freeze"/></text>
     <text x="56" y="296" class="seldim">Go          </text>
     <rect x="280" y="285" width="380" height="12" fill="#d9d9d9"/>
     <rect x="280" y="285" width="0" height="12" fill="#00ADD8">
-        <animate attributeName="width" from="0" to="158.5" begin="0.0s" dur="1.0s" fill="freeze"/>
+        <animate attributeName="width" from="0" to="172.9" begin="0.0s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="296" class="seldim">41.7%</text>    <text x="56" y="315" class="seldim">C++         </text>
+    <text x="674" y="296" class="seldim">45.5%</text>    <text x="56" y="315" class="seldim">C++         </text>
     <rect x="280" y="304" width="380" height="12" fill="#d9d9d9"/>
     <rect x="280" y="304" width="0" height="12" fill="#f34b7d">
-        <animate attributeName="width" from="0" to="95.0" begin="0.12s" dur="1.0s" fill="freeze"/>
+        <animate attributeName="width" from="0" to="103.7" begin="0.12s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="315" class="seldim">25.0%</text>    <text x="56" y="334" class="seldim">C           </text>
+    <text x="674" y="315" class="seldim">27.3%</text>    <text x="56" y="334" class="seldim">C           </text>
     <rect x="280" y="323" width="380" height="12" fill="#d9d9d9"/>
     <rect x="280" y="323" width="0" height="12" fill="#555555">
-        <animate attributeName="width" from="0" to="31.5" begin="0.24s" dur="1.0s" fill="freeze"/>
+        <animate attributeName="width" from="0" to="34.6" begin="0.24s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="334" class="seldim">8.3%</text>    <text x="56" y="353" class="seldim">HTML        </text>
+    <text x="674" y="334" class="seldim">9.1%</text>    <text x="56" y="353" class="seldim">JavaScript  </text>
     <rect x="280" y="342" width="380" height="12" fill="#d9d9d9"/>
-    <rect x="280" y="342" width="0" height="12" fill="#e34c26">
-        <animate attributeName="width" from="0" to="31.5" begin="0.36s" dur="1.0s" fill="freeze"/>
+    <rect x="280" y="342" width="0" height="12" fill="#f1e05a">
+        <animate attributeName="width" from="0" to="34.6" begin="0.36s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="353" class="seldim">8.3%</text>    <text x="56" y="372" class="seldim">JavaScript  </text>
+    <text x="674" y="353" class="seldim">9.1%</text>    <text x="56" y="372" class="seldim">Python      </text>
     <rect x="280" y="361" width="380" height="12" fill="#d9d9d9"/>
-    <rect x="280" y="361" width="0" height="12" fill="#f1e05a">
-        <animate attributeName="width" from="0" to="31.5" begin="0.48s" dur="1.0s" fill="freeze"/>
+    <rect x="280" y="361" width="0" height="12" fill="#3572A5">
+        <animate attributeName="width" from="0" to="34.6" begin="0.48s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="372" class="seldim">8.3%</text>
+    <text x="674" y="372" class="seldim">9.1%</text>
 
     </g>
     </a>

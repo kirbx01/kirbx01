@@ -520,7 +520,7 @@ def generate_svg(data: dict) -> str:
     <g class="selbox">
       <rect x="{x0}" y="{sel_item_y}" width="{W - 2 * x0}" height="{sel_box_h}" class="rs"/>
       <rect x="{x0 + 4}" y="{sel_item_y + 4}" width="{W - 2 * x0 - 8}" height="{sel_box_h - 8}" class="rs2"/>
-      <text x="{x0 + 20}" y="{sel_title_y}" class="sel" font-size="17">kirbx01 GNU Linux (Active Contributor)</text>
+      <text x="{x0 + 20}" y="{sel_title_y}" class="sel" font-size="17">kirbx01 GNU Linux (Larp Larp Larp Sahur)</text>
       {" ".join(stat_rows)}
       {lang_block}
     </g>

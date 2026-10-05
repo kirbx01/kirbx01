@@ -10,12 +10,11 @@
 <br/><br/>
 
 <p align="center">
-  <a href="https://kirbx01.github.io/artgallery/?art=01"><img src="https://kirbx01.github.io/artgallery/generated/01.svg" width="52" alt="Angry Pup"></a>
-  <a href="https://kirbx01.github.io/artgallery/?art=02"><img src="https://kirbx01.github.io/artgallery/generated/02.svg" width="52" alt="Anatomy Lesson (Blockart)"></a>
-  <a href="https://kirbx01.github.io/artgallery/?art=03"><img src="https://kirbx01.github.io/artgallery/generated/03.svg" width="52" alt="CID Fun Art Poster"></a>
-  <a href="https://kirbx01.github.io/artgallery/?art=04"><img src="https://kirbx01.github.io/artgallery/generated/04.svg" width="52" alt="Eminem Portrait Lineart"></a>
-  <a href="https://kirbx01.github.io/artgallery/?art=05"><img src="https://kirbx01.github.io/artgallery/generated/05.svg" width="52" alt="Foo Fighters JJBA"></a>
-  <a href="https://kirbx01.github.io/artgallery/?art=06"><img src="https://kirbx01.github.io/artgallery/generated/06.svg" width="52" alt="Invincible"></a>
+  <a href="https://kirbx01.github.io/artgallery/?art=01"><img src="https://kirbx01.github.io/artgallery/generated/01.svg" width="120" alt="Angry Pup"></a>
+  <a href="https://kirbx01.github.io/artgallery/?art=02"><img src="https://kirbx01.github.io/artgallery/generated/02.svg" width="120" alt="Anatomy Lesson (Blockart)"></a>
+  <a href="https://kirbx01.github.io/artgallery/?art=04"><img src="https://kirbx01.github.io/artgallery/generated/04.svg" width="120" alt="Eminem Portrait Lineart"></a>
+  <a href="https://kirbx01.github.io/artgallery/?art=05"><img src="https://kirbx01.github.io/artgallery/generated/05.svg" width="120" alt="Foo Fighters JJBA"></a>
+  <a href="https://kirbx01.github.io/artgallery/?art=06"><img src="https://kirbx01.github.io/artgallery/generated/06.svg" width="120" alt="Invincible"></a>
 </p>
 
 <p align="center">

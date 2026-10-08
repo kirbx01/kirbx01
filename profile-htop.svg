@@ -44,29 +44,29 @@
     <text x="56" y="296" class="seldim">Go          </text>
     <rect x="280" y="285" width="380" height="12" fill="#d9d9d9"/>
     <rect x="280" y="285" width="0" height="12" fill="#00ADD8">
-        <animate attributeName="width" from="0" to="175.6" begin="0.0s" dur="1.0s" fill="freeze"/>
+        <animate attributeName="width" from="0" to="158.5" begin="0.0s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="296" class="seldim">46.2%</text>    <text x="56" y="315" class="seldim">C++         </text>
+    <text x="674" y="296" class="seldim">41.7%</text>    <text x="56" y="315" class="seldim">C++         </text>
     <rect x="280" y="304" width="380" height="12" fill="#d9d9d9"/>
     <rect x="280" y="304" width="0" height="12" fill="#f34b7d">
-        <animate attributeName="width" from="0" to="87.8" begin="0.12s" dur="1.0s" fill="freeze"/>
+        <animate attributeName="width" from="0" to="95.0" begin="0.12s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="315" class="seldim">23.1%</text>    <text x="56" y="334" class="seldim">JavaScript  </text>
+    <text x="674" y="315" class="seldim">25.0%</text>    <text x="56" y="334" class="seldim">JavaScript  </text>
     <rect x="280" y="323" width="380" height="12" fill="#d9d9d9"/>
     <rect x="280" y="323" width="0" height="12" fill="#f1e05a">
-        <animate attributeName="width" from="0" to="58.5" begin="0.24s" dur="1.0s" fill="freeze"/>
+        <animate attributeName="width" from="0" to="63.5" begin="0.24s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="334" class="seldim">15.4%</text>    <text x="56" y="353" class="seldim">C           </text>
+    <text x="674" y="334" class="seldim">16.7%</text>    <text x="56" y="353" class="seldim">C           </text>
     <rect x="280" y="342" width="380" height="12" fill="#d9d9d9"/>
     <rect x="280" y="342" width="0" height="12" fill="#555555">
-        <animate attributeName="width" from="0" to="29.3" begin="0.36s" dur="1.0s" fill="freeze"/>
+        <animate attributeName="width" from="0" to="31.5" begin="0.36s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="353" class="seldim">7.7%</text>    <text x="56" y="372" class="seldim">Python      </text>
+    <text x="674" y="353" class="seldim">8.3%</text>    <text x="56" y="372" class="seldim">Python      </text>
     <rect x="280" y="361" width="380" height="12" fill="#d9d9d9"/>
     <rect x="280" y="361" width="0" height="12" fill="#3572A5">
-        <animate attributeName="width" from="0" to="29.3" begin="0.48s" dur="1.0s" fill="freeze"/>
+        <animate attributeName="width" from="0" to="31.5" begin="0.48s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="372" class="seldim">7.7%</text>
+    <text x="674" y="372" class="seldim">8.3%</text>
 
     </g>
     </a>

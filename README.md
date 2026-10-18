@@ -16,7 +16,6 @@
   <a href="https://kirbx01.github.io/artgallery/?art=05"><img src="https://kirbx01.github.io/artgallery/generated/05.svg" width="120" alt="Foo Fighters JJBA"></a>
   <a href="https://kirbx01.github.io/artgallery/?art=06"><img src="https://kirbx01.github.io/artgallery/generated/06.svg" width="120" alt="Invincible"></a>
 </p>
-
 <p align="center">
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=c,cpp,go,python,ts,react,nextjs,docker,unity,blender,linux&theme=dark" alt="Tech Stack" />

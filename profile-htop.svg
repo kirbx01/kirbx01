@@ -36,7 +36,7 @@
             <text x="56" y="132" class="seldim">Total Commits</text>
       <text x="744" y="132" text-anchor="end" class="sel" font-size="17">1.1K<animate attributeName="opacity" from="0" to="1" begin="0.0s" dur="0.3s" fill="freeze"/></text>       <text x="56" y="153" class="seldim">Pull Requests</text>
       <text x="744" y="153" text-anchor="end" class="sel" font-size="17">29<animate attributeName="opacity" from="0" to="1" begin="0.08s" dur="0.3s" fill="freeze"/></text>       <text x="56" y="174" class="seldim">Repositories</text>
-      <text x="744" y="174" text-anchor="end" class="sel" font-size="17">28<animate attributeName="opacity" from="0" to="1" begin="0.16s" dur="0.3s" fill="freeze"/></text>       <text x="56" y="195" class="seldim">Issues</text>
+      <text x="744" y="174" text-anchor="end" class="sel" font-size="17">27<animate attributeName="opacity" from="0" to="1" begin="0.16s" dur="0.3s" fill="freeze"/></text>       <text x="56" y="195" class="seldim">Issues</text>
       <text x="744" y="195" text-anchor="end" class="sel" font-size="17">7<animate attributeName="opacity" from="0" to="1" begin="0.24s" dur="0.3s" fill="freeze"/></text>       <text x="56" y="216" class="seldim">Stars</text>
       <text x="744" y="216" text-anchor="end" class="sel" font-size="17">24<animate attributeName="opacity" from="0" to="1" begin="0.32s" dur="0.3s" fill="freeze"/></text>       <text x="56" y="237" class="seldim">Year Contributions</text>
       <text x="744" y="237" text-anchor="end" class="sel" font-size="17">1.1K<animate attributeName="opacity" from="0" to="1" begin="0.4s" dur="0.3s" fill="freeze"/></text>
@@ -44,29 +44,29 @@
     <text x="56" y="296" class="seldim">Go          </text>
     <rect x="280" y="285" width="380" height="12" fill="#d9d9d9"/>
     <rect x="280" y="285" width="0" height="12" fill="#00ADD8">
-        <animate attributeName="width" from="0" to="105.6" begin="0.0s" dur="1.0s" fill="freeze"/>
+        <animate attributeName="width" from="0" to="111.7" begin="0.0s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="296" class="seldim">27.8%</text>    <text x="56" y="315" class="seldim">C++         </text>
+    <text x="674" y="296" class="seldim">29.4%</text>    <text x="56" y="315" class="seldim">C++         </text>
     <rect x="280" y="304" width="380" height="12" fill="#d9d9d9"/>
     <rect x="280" y="304" width="0" height="12" fill="#f34b7d">
-        <animate attributeName="width" from="0" to="84.4" begin="0.12s" dur="1.0s" fill="freeze"/>
+        <animate attributeName="width" from="0" to="89.3" begin="0.12s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="315" class="seldim">22.2%</text>    <text x="56" y="334" class="seldim">Python      </text>
+    <text x="674" y="315" class="seldim">23.5%</text>    <text x="56" y="334" class="seldim">JavaScript  </text>
     <rect x="280" y="323" width="380" height="12" fill="#d9d9d9"/>
-    <rect x="280" y="323" width="0" height="12" fill="#3572A5">
-        <animate attributeName="width" from="0" to="63.5" begin="0.24s" dur="1.0s" fill="freeze"/>
+    <rect x="280" y="323" width="0" height="12" fill="#f1e05a">
+        <animate attributeName="width" from="0" to="66.9" begin="0.24s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="334" class="seldim">16.7%</text>    <text x="56" y="353" class="seldim">JavaScript  </text>
+    <text x="674" y="334" class="seldim">17.6%</text>    <text x="56" y="353" class="seldim">Python      </text>
     <rect x="280" y="342" width="380" height="12" fill="#d9d9d9"/>
-    <rect x="280" y="342" width="0" height="12" fill="#f1e05a">
-        <animate attributeName="width" from="0" to="63.5" begin="0.36s" dur="1.0s" fill="freeze"/>
+    <rect x="280" y="342" width="0" height="12" fill="#3572A5">
+        <animate attributeName="width" from="0" to="44.8" begin="0.36s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="353" class="seldim">16.7%</text>    <text x="56" y="372" class="seldim">Verilog     </text>
+    <text x="674" y="353" class="seldim">11.8%</text>    <text x="56" y="372" class="seldim">Verilog     </text>
     <rect x="280" y="361" width="380" height="12" fill="#d9d9d9"/>
     <rect x="280" y="361" width="0" height="12" fill="#8888b8">
-        <animate attributeName="width" from="0" to="21.3" begin="0.48s" dur="1.0s" fill="freeze"/>
+        <animate attributeName="width" from="0" to="22.4" begin="0.48s" dur="1.0s" fill="freeze"/>
     </rect>
-    <text x="674" y="372" class="seldim">5.6%</text>
+    <text x="674" y="372" class="seldim">5.9%</text>
 
     </g>
     </a>
